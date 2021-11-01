@@ -1,0 +1,14 @@
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.exe
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.deps.json
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.runtimeconfig.json
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.runtimeconfig.dev.json
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.dll
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\bin\Debug\netcoreapp3.1\chapter03.pdb
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.csproj.AssemblyReference.cache
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.AssemblyInfoInputs.cache
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.AssemblyInfo.cs
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.csproj.CoreCompileInputs.cache
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.dll
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.pdb
+C:\Users\hanm\OneDrive\Programming\ML\cs\Book\chapter03\obj\Debug\netcoreapp3.1\chapter03.genruntimeconfig.cache

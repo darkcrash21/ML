@@ -1,0 +1,4 @@
+#Name,filePrefix,fileSuffix,Url,HTML Marker
+SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,priceValue smallerPrice
+ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,priceValue 
+ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,priceValue 

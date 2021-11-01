@@ -1,0 +1,10 @@
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/bin/Debug/netstandard2.0/MLModel.zip
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/bin/Debug/netstandard2.0/SampleClassification.Model.deps.json
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/bin/Debug/netstandard2.0/SampleClassification.Model.dll
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/bin/Debug/netstandard2.0/SampleClassification.Model.pdb
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.csprojAssemblyReference.cache
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.AssemblyInfoInputs.cache
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.AssemblyInfo.cs
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.csproj.CoreCompileInputs.cache
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.dll
+/Users/michaelhan/OneDrive/Programming/ML/cs/tutorial/SampleClassification/SampleClassification.Model/obj/Debug/netstandard2.0/SampleClassification.Model.pdb
