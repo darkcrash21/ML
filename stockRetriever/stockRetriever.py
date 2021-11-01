@@ -1,6 +1,7 @@
 import urllib.request
 import time
 import threading
+import os
 
 
 configFile = "settings.csv"
@@ -65,6 +66,17 @@ def ReadCoinList():
 # end ReadCoinList()
 
 #
+# Git auto push
+#
+def GitAutoPush():
+    print("Git Add")
+    os.system("git add .")
+    print("Git Commit")
+    os.system("git commit -m \"Auto update\"")
+    print("Git Push")
+    os.system("git push")
+
+#
 # Thread to grab prices for all urls
 #
 def GetPriceThread():
@@ -120,6 +132,7 @@ def GetPriceThread():
         # for url in urls
 
         if endProgram != True:
+            GitAutoPush()
             print("*****")
             time.sleep(pollSleepTime_Sec)
     # while !endProgram
