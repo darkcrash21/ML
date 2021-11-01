@@ -120,6 +120,7 @@ def GetPriceThread():
         # for url in urls
 
         if endProgram != True:
+            print("*****")
             time.sleep(pollSleepTime_Sec)
     # while !endProgram
 # GetPriceThread()
