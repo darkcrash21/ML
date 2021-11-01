@@ -2,6 +2,7 @@ import urllib.request
 import time
 import threading
 
+
 configFile = "settings.csv"
 coinListFile = "coinList.csv"
 endProgram = False
