@@ -11,12 +11,6 @@ endProgram = False
 pollSleepTime_Sec = 10
 coins = []
 
-class Days(enum.Enum):
-   Price = 0
-   MarketCap = 1
-   Volume = 2
-   CirculatingSupply = 3
-
 #
 # Read Config
 #
@@ -63,21 +57,17 @@ def ReadCoinList():
                 'filePrefix': lineSplit[1],
                 'fileSuffix': lineSplit[2],
                 'url': lineSplit[3],
-                'markers' : [
-                    #lineSplit[4],
-                    #lineSplit[5],
-                    #lineSplit[6],
-                    #lineSplit[7]
-                ]
+                'markers' : []
             }
 
             markerLength = len(lineSplit) - 4
             for i in range(markerLength):
                 markerSplit = lineSplit[i + 4].split(":")
                 markerObject  = {
-                    'enumIndex' : i,
-                    'divMarker' : markerSplit[0],
-                    'valueMarker' : markerSplit[1]
+                    'index' : i,
+                    'markerName' : markerSplit[0],
+                    'divMarker' : markerSplit[1],
+                    'valueMarker' : markerSplit[2]
                 }
                 coin['markers'].append(markerObject)
 
@@ -110,7 +100,11 @@ def GetPriceThread():
         if not os.path.exists(coin['filename']):
             fs = open(coin['filename'], "w", encoding="utf-8")
             # write out the header
-            fs.write("year,month,day,hour,minute,second,")
+            header = "year,month,day,hour,minute,second,"
+            for marker in coin['markers']:
+                header += marker['markerName'] + ","
+            header = header[0:len(header) - 1]
+            fs.write(header)
             fs.close()
 
     while endProgram != True:
@@ -148,6 +142,7 @@ def GetPriceThread():
                 else:
                     outputLine += ","
 
+            outputLine = outputLine[0:len(outputLine) - 1]
             print(coin['name'] + ": " + outputLine)
             fs.write(outputLine + "\n")
             fs.close()
