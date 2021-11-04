@@ -145,25 +145,8 @@ def GetPriceThread():
                     value = sub[startIndex:endIndex]
                     value = value.replace(",", "")
                     outputLine += value + ","
-                    
-
-            ## if the text is in the data
-            #textMarker = coin['marker']
-            #if textMarker in dataStr:
-            #    startIndex = dataStr.index(textMarker)
-#
-            #    # Get the index of the start of the actual price
-            #    sub = dataStr[startIndex:]
-            #    startIndex = sub.index("$") + 1
-#
-            #    # Get the index of the end of the actual price
-            #    endIndex = sub.index("<")
-            #    price = sub[startIndex:endIndex]
-            #    price = price.replace(",", "")
-            #    outputLine += price
-            #else:
-            #    print("Marker not found for " + coin['name'])
-            ## if marker in text
+                else:
+                    outputLine += ","
 
             print(coin['name'] + ": " + outputLine)
             fs.write(outputLine + "\n")

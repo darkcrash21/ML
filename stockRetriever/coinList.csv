@@ -1,4 +1,5 @@
-#Name,filePrefix,fileSuffix,Url,HTML Marker
-SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
-ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
-ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
+#Name,filePrefix,fileSuffix,Url,HTML Markers (Name:StartingMarker:EndingMarker)
+SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
+ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
+ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
+FB,Stocks,Data,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=FB,Price:<td class="last-col":>,High:<td class="high-col":>,Low:<td class="low-col":>,Volume:<td class="volume-col":>
