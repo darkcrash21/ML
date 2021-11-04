@@ -104,7 +104,7 @@ def GetPriceThread():
             for marker in coin['markers']:
                 header += marker['markerName'] + ","
             header = header[0:len(header) - 1]
-            fs.write(header)
+            fs.write(header + "\n")
             fs.close()
 
     while endProgram != True:
