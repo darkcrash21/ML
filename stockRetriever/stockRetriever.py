@@ -2,6 +2,7 @@ import urllib.request
 import time
 import threading
 import os
+import os.path
 
 
 configFile = "settings.csv"
@@ -84,10 +85,11 @@ def GetPriceThread():
     print("GetPriceThread Start\n")
 
     for coin in coins:
-        fs = open(coin['filename'], "w", encoding="utf-8")
-        # write out the header
-        fs.write("year,month,day,hour,minute,second,")
-        fs.close()
+        if not os.path.exists(coin['filename']):
+            fs = open(coin['filename'], "w", encoding="utf-8")
+            # write out the header
+            fs.write("year,month,day,hour,minute,second,")
+            fs.close()
 
     while endProgram != True:
         # Get the current timestamp
