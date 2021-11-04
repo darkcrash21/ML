@@ -3,13 +3,19 @@ import time
 import threading
 import os
 import os.path
-
+import enum
 
 configFile = "settings.csv"
 coinListFile = "coinList.csv"
 endProgram = False
 pollSleepTime_Sec = 10
 coins = []
+
+class Days(enum.Enum):
+   Price = 0
+   MarketCap = 1
+   Volume = 2
+   CirculatingSupply = 3
 
 #
 # Read Config
@@ -51,17 +57,33 @@ def ReadCoinList():
     for line in fs.readlines():
         line = line.replace("\n", "")
         lineSplit = line.split(",")
-        if line.startswith("#") == False and len(lineSplit) == 5:
+        if line.startswith("#") == False and len(lineSplit) >= 4:
             coin = {
-                    'name': lineSplit[0],
-                    'filePrefix': lineSplit[1],
-                    'fileSuffix': lineSplit[2],
-                    'url': lineSplit[3],
-                    'marker': lineSplit[4]
+                'name': lineSplit[0],
+                'filePrefix': lineSplit[1],
+                'fileSuffix': lineSplit[2],
+                'url': lineSplit[3],
+                'markers' : [
+                    #lineSplit[4],
+                    #lineSplit[5],
+                    #lineSplit[6],
+                    #lineSplit[7]
+                ]
             }
+
+            markerLength = len(lineSplit) - 4
+            for i in range(markerLength):
+                markerSplit = lineSplit[i + 4].split(":")
+                markerObject  = {
+                    'enumIndex' : i,
+                    'divMarker' : markerSplit[0],
+                    'valueMarker' : markerSplit[1]
+                }
+                coin['markers'].append(markerObject)
+
             coin['filename'] = coin['filePrefix'] + coin['name'] + coin['fileSuffix']
             coins.append(coin)
-            print("Gathering price for " + coin['name'] + " using marker " + coin['marker'])
+            print("Gathering price for " + coin['name'])
         # lineSplit.len = 3
     # for each line
 # end ReadCoinList()
@@ -110,23 +132,38 @@ def GetPriceThread():
             data = webUrl.read()
             dataStr = data.decode("utf8")
 
-            # if the text is in the data
-            textMarker = coin['marker']
-            if textMarker in dataStr:
-                startIndex = dataStr.index(textMarker)
+            for marker in coin['markers']:
+                if marker['divMarker'] in dataStr:
+                    startIndex = dataStr.index(marker['divMarker'])
 
-                # Get the index of the start of the actual price
-                sub = dataStr[startIndex:]
-                startIndex = sub.index("$") + 1
+                    # Get the index of the start of the actual value
+                    sub = dataStr[startIndex:]
+                    startIndex = sub.index(marker['valueMarker']) + len(marker['valueMarker'])
+                    
+                    # Get the index of the end of the actual value
+                    endIndex = sub.index("<", startIndex + 1)
+                    value = sub[startIndex:endIndex]
+                    value = value.replace(",", "")
+                    outputLine += value + ","
+                    
 
-                # Get the index of the end of the actual price
-                endIndex = sub.index("<")
-                price = sub[startIndex:endIndex]
-                price = price.replace(",", "")
-                outputLine += price
-            else:
-                print("Marker not found for " + coin['name'])
-            # if marker in text
+            ## if the text is in the data
+            #textMarker = coin['marker']
+            #if textMarker in dataStr:
+            #    startIndex = dataStr.index(textMarker)
+#
+            #    # Get the index of the start of the actual price
+            #    sub = dataStr[startIndex:]
+            #    startIndex = sub.index("$") + 1
+#
+            #    # Get the index of the end of the actual price
+            #    endIndex = sub.index("<")
+            #    price = sub[startIndex:endIndex]
+            #    price = price.replace(",", "")
+            #    outputLine += price
+            #else:
+            #    print("Marker not found for " + coin['name'])
+            ## if marker in text
 
             print(coin['name'] + ": " + outputLine)
             fs.write(outputLine + "\n")

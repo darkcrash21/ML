@@ -1,4 +1,4 @@
 #Name,filePrefix,fileSuffix,Url,HTML Marker
-SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,priceValue 
-ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,priceValue 
-ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,priceValue 
+SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
+ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
+ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,priceValue :$,Market Cap:$,Volume:$,Circulating Supply:statsValue">
