@@ -3,6 +3,7 @@ SHIB,Coin,Data,https://coinmarketcap.com/currencies/shiba-inu/,Price:priceValue 
 ETH,Coin,Data,https://coinmarketcap.com/currencies/ethereum/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
 ALGO,Coin,Data,https://coinmarketcap.com/currencies/algorand/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
 CARDANO,Coin,Data,https://coinmarketcap.com/currencies/cardano/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
+Bitcoin,Coin,Data,https://coinmarketcap.com/currencies/bitcoin/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
 DOGE,Coin,Data,https://coinmarketcap.com/currencies/dogecoin/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
 LEASH,Coin,Data,https://coinmarketcap.com/currencies/doge-killer/,Price:priceValue :$,Market Cap:Market Cap:$,Volume:Volume:$,Circulating Supply:Circulating Supply:statsValue">
 Facebook,Stocks,Data,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=FB,Price:<td class="last-col":>,High:<td class="high-col":>,Low:<td class="low-col":>,Volume:<td class="volume-col":>
