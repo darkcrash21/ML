@@ -100,7 +100,7 @@ def GetPriceThread():
         if not os.path.exists(coin['filename']):
             fs = open(coin['filename'], "w", encoding="utf-8")
             # write out the header
-            header = "year,month,day,hour,minute,second,"
+            header = "Date-Time,"
             for marker in coin['markers']:
                 header += marker['markerName'] + ","
             header = header[0:len(header) - 1]
@@ -115,8 +115,8 @@ def GetPriceThread():
         hour = str(time.localtime().tm_hour)
         minute = str(time.localtime().tm_min)
         sec = str(time.localtime().tm_sec)
-        timestamp = year + "," + month + "," + day + "," + hour + "," + minute + "," + sec + ","
-        
+        #timestamp = year + "," + month + "," + day + "," + hour + "," + minute + "," + sec + ","
+        timestamp = '{year:04d}' + "-" + '{month:02d}' + "-" + '{day:02d}' + "T" + '{hour:02d}' + ":" + '{minute:02d}' + ":" + sec + ","
         # for each url
         for coin in coins:
             outputLine = timestamp
