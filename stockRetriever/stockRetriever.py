@@ -116,7 +116,7 @@ def GetPriceThread():
         minute = str(time.localtime().tm_min)
         sec = str(time.localtime().tm_sec)
         #timestamp = year + "," + month + "," + day + "," + hour + "," + minute + "," + sec + ","
-        timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec + ","
+        timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec.zfill(2) + ","
         # for each url
         for coin in coins:
             outputLine = timestamp
