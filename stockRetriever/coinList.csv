@@ -10,4 +10,4 @@ Facebook,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&m
 Microvast,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=MVST,Price:<td class="last-col":>,High:<td class="high-col":>,Low:<td class="low-col":>,Volume:<td class="volume-col":>
 NIO,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=NIO,Price:<td class="last-col":>,High:<td class="high-col":>,Low:<td class="low-col":>,Volume:<td class="volume-col":>
 Tesla,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=TSLA,Price:<td class="last-col":>,High:<td class="high-col":>,Low:<td class="low-col":>,Volume:<td class="volume-col":>
-Shib-Burn,Coin,.dat,https://www.shibburn.com/,Burned:burnval:">
+Shib-Burn,Coin,.dat,https://www.shibburn.com/,Burned:burnval:.5s
