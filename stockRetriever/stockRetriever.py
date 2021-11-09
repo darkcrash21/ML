@@ -3,10 +3,10 @@ import time
 import threading
 import os
 import os.path
-import enum
+import sys
 
 configFile = "settings.csv"
-coinListFile = "coinList.csv"
+coinListFile = "myList.csv"
 endProgram = False
 pollSleepTime_Sec = 10
 coins = []
@@ -115,37 +115,41 @@ def GetPriceThread():
         hour = str(time.localtime().tm_hour)
         minute = str(time.localtime().tm_min)
         sec = str(time.localtime().tm_sec)
-        #timestamp = year + "," + month + "," + day + "," + hour + "," + minute + "," + sec + ","
         timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec.zfill(2) + ","
+        
         # for each url
         for coin in coins:
             outputLine = timestamp
-            fs = open(coin['filename'], "a", encoding="utf-8")
-            # Get the html data
-            webUrl = urllib.request.urlopen(coin['url'])
-            data = webUrl.read()
-            dataStr = data.decode("utf8")
+            
+            try:
+                fs = open(coin['filename'], "a", encoding="utf-8")
+                # Get the html data
+                webUrl = urllib.request.urlopen(coin['url'])
+                data = webUrl.read()
+                dataStr = data.decode("utf8")
 
-            for marker in coin['markers']:
-                if marker['divMarker'] in dataStr:
-                    startIndex = dataStr.index(marker['divMarker'])
+                for marker in coin['markers']:
+                    if marker['divMarker'] in dataStr:
+                        startIndex = dataStr.index(marker['divMarker'])
 
-                    # Get the index of the start of the actual value
-                    sub = dataStr[startIndex:]
-                    startIndex = sub.index(marker['valueMarker']) + len(marker['valueMarker'])
-                    
-                    # Get the index of the end of the actual value
-                    endIndex = sub.index("<", startIndex + 1)
-                    value = sub[startIndex:endIndex]
-                    value = value.replace(",", "")
-                    outputLine += value + ","
-                else:
-                    outputLine += ","
+                        # Get the index of the start of the actual value
+                        sub = dataStr[startIndex:]
+                        startIndex = sub.index(marker['valueMarker']) + len(marker['valueMarker'])
+                        
+                        # Get the index of the end of the actual value
+                        endIndex = sub.index("<", startIndex + 1)
+                        value = sub[startIndex:endIndex]
+                        value = value.replace(",", "")
+                        outputLine += value + ","
+                    else:
+                        outputLine += ","
 
-            outputLine = outputLine[0:len(outputLine) - 1]
-            print(coin['name'] + ": " + outputLine)
-            fs.write(outputLine + "\n")
-            fs.close()
+                outputLine = outputLine[0:len(outputLine) - 1]
+                print(coin['name'] + ": " + outputLine)
+                fs.write(outputLine + "\n")
+                fs.close()
+            except:
+                print("Exception occured with " + coin['name'])
         # for url in urls
 
         if endProgram != True:
