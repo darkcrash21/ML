@@ -141,6 +141,11 @@ def GetPriceThread():
                         endIndex = sub.index(marker['endMarker'], startIndex + 1)
                         value = sub[startIndex:endIndex]
                         value = value.replace(",", "")
+
+                        # if Shib Burn, the value is shifted right by 18 digits
+                        if coin['name'] == 'Shib-Burn':
+                            value = value[0:len(value) - 18]
+
                         outputLine += value + ","
                     else:
                         outputLine += ","
