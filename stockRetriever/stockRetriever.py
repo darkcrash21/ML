@@ -66,8 +66,9 @@ def ReadCoinList():
                 markerObject  = {
                     'index' : i,
                     'markerName' : markerSplit[0],
-                    'divMarker' : markerSplit[1],
-                    'valueMarker' : markerSplit[2]
+                    'startMarker' : markerSplit[1],
+                    'valueMarker' : markerSplit[2],
+                    'endMarker' : markerSplit[3]
                 }
                 coin['markers'].append(markerObject)
 
@@ -129,15 +130,15 @@ def GetPriceThread():
                 dataStr = data.decode("utf8")
 
                 for marker in coin['markers']:
-                    if marker['divMarker'] in dataStr:
-                        startIndex = dataStr.index(marker['divMarker'])
+                    if marker['startMarker'] in dataStr:
+                        startIndex = dataStr.index(marker['startMarker'])
 
                         # Get the index of the start of the actual value
                         sub = dataStr[startIndex:]
                         startIndex = sub.index(marker['valueMarker']) + len(marker['valueMarker'])
                         
                         # Get the index of the end of the actual value
-                        endIndex = sub.index("<", startIndex + 1)
+                        endIndex = sub.index(marker['endMarker'], startIndex + 1)
                         value = sub[startIndex:endIndex]
                         value = value.replace(",", "")
                         outputLine += value + ","
