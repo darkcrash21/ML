@@ -75,14 +75,22 @@ def ReadInvestmentsList():
 # end ReadInvestmentsList()
 
 #
-# Thread to grab price for an investment
+# CreateDailyInvestmentFile
 #
-def GetPriceThread(investment):
-    print("GetPriceThread: " + investment['name'] + " Start\n")
+def CreateDailyInvestmentFile(filename):
+    year = str(time.localtime().tm_year).zfill(4)
+    month = str(time.localtime().tm_mon).zfill(2)
+    day = str(time.localtime().tm_mday).zfill(2)
 
-    # Create the file if it doesn't exist
-    if not os.path.exists(investment['filename']):
-        fs = open(investment['filename'], "w", encoding="utf-8")
+    # Create the day's directory if it doesn't exist
+    dir = year + "-" + month + "-" + day + "/"
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+
+    # Create the file in the directory if it doesn't exist
+    filePath = dir + filename
+    if not os.path.exists(filePath):
+        fs = open(filePath, "w", encoding="utf-8")
         # write out the header
         header = "Date-Time,"
         for marker in investment['markers']:
@@ -90,21 +98,31 @@ def GetPriceThread(investment):
         header = header[0:len(header) - 1]
         fs.write(header + "\n")
         fs.close()
+    
+    return filePath
+# CreateDailyInvestmentFile()
+
+#
+# Thread to grab price for an investment
+#
+def GetPriceThread(investment):
+    print("GetPriceThread: " + investment['name'] + " Start\n")
 
     while endProgram != True:
         # Get the current timestamp
-        year = str(time.localtime().tm_year)
-        month = str(time.localtime().tm_mon)
-        day = str(time.localtime().tm_mday)
-        hour = str(time.localtime().tm_hour)
-        minute = str(time.localtime().tm_min)
-        sec = str(time.localtime().tm_sec)
-        timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec.zfill(2) + ","
+        year = str(time.localtime().tm_year).zfill(4)
+        month = str(time.localtime().tm_mon).zfill(2)
+        day = str(time.localtime().tm_mday).zfill(2)
+        hour = str(time.localtime().tm_hour).zfill(2)
+        minute = str(time.localtime().tm_min).zfill(2)
+        sec = str(time.localtime().tm_sec).zfill(2)
+        timestamp = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec + ","
         
         outputLine = timestamp
         
+        filePath = CreateDailyInvestmentFile(investment['filename'])
         try:
-            fs = open(investment['filename'], "a", encoding="utf-8")
+            fs = open(filePath, "a", encoding="utf-8")
             # Get the html data
             webUrl = urllib.request.urlopen(investment['url'])
             data = webUrl.read()
@@ -166,26 +184,18 @@ def GitPushThread():
 #
 ReadInvestmentsList()
 
-listThreads = []
-
 thGitPush = threading.Thread(target=GitPushThread, args=())
 thGitPush.start()
-listThreads.append(thGitPush)
 
 for investment in investments:
     thGetPrice = threading.Thread(target=GetPriceThread, args=[investment])
     thGetPrice.start()
-    listThreads.append(thGetPrice)
 
 while endProgram != True:
     cmd = input()
     if "q" in cmd:
         endProgram = True
         print("Ending Program")
-
-        # killing all threads
-        for th in listThreads:
-            th.terminate()
 # while !endProgram
 
 # end Main     
