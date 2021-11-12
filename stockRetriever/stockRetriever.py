@@ -166,10 +166,12 @@ def GetPriceThread(investment):
 #
 def GitPushThread():
     while endProgram != True:
+	print("Git: Pull")
+	os.system("git pull")
         print("Git: Add")
         os.system("git add .")
         print("Git: Commit")
-        os.system("git commit -m \"Auto update\"")
+        os.system("git commit -m \"(stockRetreiver) Auto update\"")
         print("Git: Push")
         os.system("git push")
 
