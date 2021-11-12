@@ -169,7 +169,7 @@ thGitPush = threading.Thread(target=GitPushThread, args=())
 thGitPush.start()
 
 for investment in investments:
-    thGetPrice = threading.Thread(target=GetPriceThread, args=(investment))
+    thGetPrice = threading.Thread(target=GetPriceThread, args=[investment])
     thGetPrice.start()
 
 while endProgram != True:
