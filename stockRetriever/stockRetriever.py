@@ -8,7 +8,7 @@ import sys
 configFile = "settings.csv"
 investmentListFile = "myList.csv"
 endProgram = False
-gitPushSleepTime_Sec = 60
+gitPushSleepTime_Sec = 120
 investments = []
 
 #
@@ -143,7 +143,9 @@ def GetPriceThread(investment):
     # while !endProgram
 # GetPriceThread()
 
+#
 # Git Push Thread
+#
 def GitPushThread():
     while endProgram != True:
         print("Git Add")
@@ -162,21 +164,28 @@ def GitPushThread():
 #
 # Main
 #
-#ReadConfig()
 ReadInvestmentsList()
+
+listThreads = []
 
 thGitPush = threading.Thread(target=GitPushThread, args=())
 thGitPush.start()
+listThreads.append(thGitPush)
 
 for investment in investments:
     thGetPrice = threading.Thread(target=GetPriceThread, args=[investment])
     thGetPrice.start()
+    listThreads.append(thGetPrice)
 
 while endProgram != True:
     cmd = input()
     if "q" in cmd:
         endProgram = True
         print("Ending Program")
+
+        # killing all threads
+        for th in listThreads:
+            th.terminate()
 # while !endProgram
 
 # end Main     
