@@ -150,11 +150,11 @@ def GetPriceThread(investment):
                     outputLine += ","
 
             outputLine = outputLine[0:len(outputLine) - 1]
-            print(investment['name'] + ": " + outputLine)
+            print("      " + investment['name'] + ": " + outputLine)
             fs.write(outputLine + "\n")
             fs.close()
         except:
-            print("Exception occured with " + investment['name'])
+            print("      Exception occured with " + investment['name'])
 
         if endProgram != True:
             time.sleep(investment['fetchFrequency_sec'])
@@ -166,11 +166,11 @@ def GetPriceThread(investment):
 #
 def GitPushThread():
     while endProgram != True:
-        print("Git Add")
+        print("Git: Add")
         os.system("git add .")
-        print("Git Commit")
+        print("Git: Commit")
         os.system("git commit -m \"Auto update\"")
-        print("Git Push")
+        print("Git: Push")
         os.system("git push")
 
         time.sleep(gitPushSleepTime_Sec)
