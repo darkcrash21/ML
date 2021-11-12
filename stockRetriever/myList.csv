@@ -1,14 +1,14 @@
-#Name,filePrefix,fileSuffix,Url,HTML Markers (Name:StartingMarker:ValueMarker:EndingMarker)
-Shib-Burn,Burn,.dat,https://www.shibburn.com/data.json,Burned::":"
-SHIB,Coin,.dat,https://coinmarketcap.com/currencies/shiba-inu/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-ETH,Coin,.dat,https://coinmarketcap.com/currencies/ethereum/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-ALGO,Coin,.dat,https://coinmarketcap.com/currencies/algorand/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-Cardano,Coin,.dat,https://coinmarketcap.com/currencies/cardano/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-Bitcoin,Coin,.dat,https://coinmarketcap.com/currencies/bitcoin/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-Doge,Coin,.dat,https://coinmarketcap.com/currencies/dogecoin/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-LEASH,Coin,.dat,https://coinmarketcap.com/currencies/doge-killer/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
-Facebook,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=FB,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
-Microvast,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=MVST,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
-NIO,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=NIO,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
-Tesla,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=TSLA,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
-Rivian,Stocks,.dat,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=RIVN,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
+#Name,filePrefix,fileSuffix,FetchFrequencyInMinutes,Url,HTML Markers (Name:StartingMarker:ValueMarker:EndingMarker)
+Shib-Burn,Burn,.dat,10,https://www.shibburn.com/data.json,Burned::":"
+SHIB,Coin,.dat,1,https://coinmarketcap.com/currencies/shiba-inu/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+ETH,Coin,.dat,1,https://coinmarketcap.com/currencies/ethereum/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+ALGO,Coin,.dat,1,https://coinmarketcap.com/currencies/algorand/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+Cardano,Coin,.dat,1,https://coinmarketcap.com/currencies/cardano/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+Bitcoin,Coin,.dat,1,https://coinmarketcap.com/currencies/bitcoin/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+Doge,Coin,.dat,1,https://coinmarketcap.com/currencies/dogecoin/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+LEASH,Coin,.dat,1,https://coinmarketcap.com/currencies/doge-killer/,Price:priceValue :$:<,Market Cap:Market Cap:$:<,Volume:Volume:$:<,Circulating Supply:Circulating Supply:statsValue">:<
+Facebook,Stocks,.dat,5,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=FB,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
+Microvast,Stocks,.dat,5,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=MVST,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
+NIO,Stocks,.dat,5,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=NIO,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
+Tesla,Stocks,.dat,5,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=TSLA,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<
+Rivian,Stocks,.dat,5,https://bigcharts.marketwatch.com/quotes/multi.asp?view=q&msymb=RIVN,Price:<td class="last-col":>:<,High:<td class="high-col":>:<,Low:<td class="low-col":>:<,Volume:<td class="volume-col":>:<

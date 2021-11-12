@@ -6,63 +6,58 @@ import os.path
 import sys
 
 configFile = "settings.csv"
-coinListFile = "myList.csv"
+investmentListFile = "myList.csv"
 endProgram = False
-pollSleepTime_Sec = 10
-coins = []
+gitPushSleepTime_Sec = 60
+investments = []
 
 #
-# Read Config
+# ParseStringToInt
 #
-def ReadConfig():
-    global pollSleepTime_Sec
-    print("Reading Config file")
-
-    pollHours = 0
-    pollMinutes = 0
-    pollSeconds = 0
-
-    fs = open(configFile, "r")
-    for line in fs.readlines():
-        lineSplit = line.split(",")
-        if "pollHours" in lineSplit[0]:
-            pollHours = int(lineSplit[1])
-        elif "pollMinutes" in lineSplit[0]:
-            pollMinutes = int(lineSplit[1])
-        elif "pollSeconds" in lineSplit[0]:
-            pollSeconds = int(lineSplit[1])
-    # end for line in lines
-
-    pollSleepTime_Sec = (pollHours * 60 * 60) + (pollMinutes * 60) + pollSeconds
-
-    print("Poll every " + str(pollSleepTime_Sec) + " seconds")
-# end ReadConfig()
+def ParseStringToInt(s):
+    successful = False
+    try:
+        value = int(s)
+        successful = True
+    except ValueError:
+        value = 0
+    return value, successful
+# ParseStringToInt()
 
 #
-# Read Coin List
+# Read Investments List
 #
-def ReadCoinList():
-    global coins
-    print ("Reading Coin List")
+def ReadInvestmentsList():
+    global investments
+    print ("Reading Investments List")
 
-    coins = []
+    investments = []
 
-    fs = open(coinListFile, "r")
+    fs = open(investmentListFile, "r")
     for line in fs.readlines():
         line = line.replace("\n", "")
         lineSplit = line.split(",")
         if line.startswith("#") == False and len(lineSplit) >= 4:
-            coin = {
+            investment = {
                 'name': lineSplit[0],
                 'filePrefix': lineSplit[1],
                 'fileSuffix': lineSplit[2],
-                'url': lineSplit[3],
+                #'fetchFrequencyInMinutes': lineSplit[3],
+                'url': lineSplit[4],
                 'markers' : []
             }
 
-            markerLength = len(lineSplit) - 4
+            # Parse the frequency in minutes and convert to seconds
+            investment['fetchFrequency_sec'], successful = ParseStringToInt(lineSplit[3])
+            if successful != True:
+                investment['fetchFrequency_sec'] = 60
+                print("Fetch Frequency parse error, defaulting to 1 minute")
+            else:
+                investment['fetchFrequency_sec'] *= 60
+
+            markerLength = len(lineSplit) - 5
             for i in range(markerLength):
-                markerSplit = lineSplit[i + 4].split(":")
+                markerSplit = lineSplit[i + 5].split(":")
                 markerObject  = {
                     'index' : i,
                     'markerName' : markerSplit[0],
@@ -70,39 +65,28 @@ def ReadCoinList():
                     'valueMarker' : markerSplit[2],
                     'endMarker' : markerSplit[3]
                 }
-                coin['markers'].append(markerObject)
+                investment['markers'].append(markerObject)
 
-            coin['filename'] = coin['filePrefix'] + coin['name'] + coin['fileSuffix']
-            coins.append(coin)
-            print("Gathering price for " + coin['name'])
+            investment['filename'] = investment['filePrefix'] + investment['name'] + investment['fileSuffix']
+            investments.append(investment)
+            print("Gathering price for " + investment['name'])
         # lineSplit.len = 3
     # for each line
-# end ReadCoinList()
-
-#
-# Git auto push
-#
-def GitAutoPush():
-    print("Git Add")
-    os.system("git add .")
-    print("Git Commit")
-    os.system("git commit -m \"Auto update\"")
-    print("Git Push")
-    os.system("git push")
+# end ReadInvestmentsList()
 
 #
 # Thread to grab prices for all urls
 #
 def GetPriceThread():
-    global exportFile, coins
+    global investments
     print("GetPriceThread Start\n")
 
-    for coin in coins:
-        if not os.path.exists(coin['filename']):
-            fs = open(coin['filename'], "w", encoding="utf-8")
+    for investment in investments:
+        if not os.path.exists(investment['filename']):
+            fs = open(investment['filename'], "w", encoding="utf-8")
             # write out the header
             header = "Date-Time,"
-            for marker in coin['markers']:
+            for marker in investment['markers']:
                 header += marker['markerName'] + ","
             header = header[0:len(header) - 1]
             fs.write(header + "\n")
@@ -119,17 +103,17 @@ def GetPriceThread():
         timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec.zfill(2) + ","
         
         # for each url
-        for coin in coins:
+        for investment in investments:
             outputLine = timestamp
             
             try:
-                fs = open(coin['filename'], "a", encoding="utf-8")
+                fs = open(investment['filename'], "a", encoding="utf-8")
                 # Get the html data
-                webUrl = urllib.request.urlopen(coin['url'])
+                webUrl = urllib.request.urlopen(investment['url'])
                 data = webUrl.read()
                 dataStr = data.decode("utf8")
 
-                for marker in coin['markers']:
+                for marker in investment['markers']:
                     if marker['startMarker'] in dataStr:
                         startIndex = dataStr.index(marker['startMarker'])
 
@@ -143,7 +127,7 @@ def GetPriceThread():
                         value = value.replace(",", "")
 
                         # if Shib Burn, the value is shifted right by 18 digits
-                        if coin['name'] == 'Shib-Burn':
+                        if investment['name'] == 'Shib-Burn':
                             value = value[0:len(value) - 18]
 
                         outputLine += value + ","
@@ -151,11 +135,11 @@ def GetPriceThread():
                         outputLine += ","
 
                 outputLine = outputLine[0:len(outputLine) - 1]
-                print(coin['name'] + ": " + outputLine)
+                print(investment['name'] + ": " + outputLine)
                 fs.write(outputLine + "\n")
                 fs.close()
             except:
-                print("Exception occured with " + coin['name'])
+                print("Exception occured with " + investment['name'])
         # for url in urls
 
         if endProgram != True:
@@ -166,13 +150,102 @@ def GetPriceThread():
 # GetPriceThread()
 
 #
+# Thread to grab price for an investment
+#
+def GetPriceThread(investment):
+    print("GetPriceThread: " + investment['name'] + " Start\n")
+
+    # Create the file if it doesn't exist
+    if not os.path.exists(investment['filename']):
+        fs = open(investment['filename'], "w", encoding="utf-8")
+        # write out the header
+        header = "Date-Time,"
+        for marker in investment['markers']:
+            header += marker['markerName'] + ","
+        header = header[0:len(header) - 1]
+        fs.write(header + "\n")
+        fs.close()
+
+    while endProgram != True:
+        # Get the current timestamp
+        year = str(time.localtime().tm_year)
+        month = str(time.localtime().tm_mon)
+        day = str(time.localtime().tm_mday)
+        hour = str(time.localtime().tm_hour)
+        minute = str(time.localtime().tm_min)
+        sec = str(time.localtime().tm_sec)
+        timestamp = year.zfill(4) + "-" + month.zfill(2) + "-" + day.zfill(2) + "T" + hour.zfill(2) + ":" + minute.zfill(2) + ":" + sec.zfill(2) + ","
+        
+        outputLine = timestamp
+        
+        try:
+            fs = open(investment['filename'], "a", encoding="utf-8")
+            # Get the html data
+            webUrl = urllib.request.urlopen(investment['url'])
+            data = webUrl.read()
+            dataStr = data.decode("utf8")
+
+            for marker in investment['markers']:
+                if marker['startMarker'] in dataStr:
+                    startIndex = dataStr.index(marker['startMarker'])
+
+                    # Get the index of the start of the actual value
+                    sub = dataStr[startIndex:]
+                    startIndex = sub.index(marker['valueMarker']) + len(marker['valueMarker'])
+                    
+                    # Get the index of the end of the actual value
+                    endIndex = sub.index(marker['endMarker'], startIndex + 1)
+                    value = sub[startIndex:endIndex]
+                    value = value.replace(",", "")
+
+                    # if Shib Burn, the value is shifted right by 18 digits
+                    if investment['name'] == 'Shib-Burn':
+                        value = value[0:len(value) - 18]
+
+                    outputLine += value + ","
+                else:
+                    outputLine += ","
+
+            outputLine = outputLine[0:len(outputLine) - 1]
+            print(investment['name'] + ": " + outputLine)
+            fs.write(outputLine + "\n")
+            fs.close()
+        except:
+            print("Exception occured with " + investment['name'])
+
+        if endProgram != True:
+            time.sleep(investment['fetchFrequency_sec'])
+    # while !endProgram
+# GetPriceThread()
+
+# Git Push Thread
+def GitPushThread():
+    while endProgram != True:
+        print("Git Add")
+        os.system("git add .")
+        print("Git Commit")
+        os.system("git commit -m \"Auto update\"")
+        print("Git Push")
+        os.system("git push")
+
+        time.sleep(gitPushSleepTime_Sec)
+        print("*****")
+    # while !endProgram
+# GitPushThread
+
+
+#
 # Main
 #
-ReadConfig()
-ReadCoinList()
+#ReadConfig()
+ReadInvestmentsList()
 
-thGetPrice = threading.Thread(target=GetPriceThread, args=())
-thGetPrice.start()
+thGitPush = threading.Thread(target=GitPushThread, args=())
+thGitPush.start()
+
+for investment in investments:
+    thGetPrice = threading.Thread(target=GetPriceThread, args=(investment))
+    thGetPrice.start()
 
 while endProgram != True:
     cmd = input()
