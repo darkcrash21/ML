@@ -9,8 +9,8 @@ namespace stockAnalyzer
         //
         #region ATTRIBUTES
 
-        private static int totalLinesForProgress = 0;
-        private static int currentLinesForProgress = 0;
+        private int totalLinesForProgress = 0;
+        private int currentLinesForProgress = 0;
 
         // Data containers
         private static Dictionary<string, BaseInvestmentType> dictInvestment2Data = new Dictionary<string, BaseInvestmentType>();
@@ -39,42 +39,102 @@ namespace stockAnalyzer
         // UI Events
         //
         #region UI_EVENTS
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void tsmiOpenDataDirectory_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog fbd = new FolderBrowserDialog())
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
-                    this.tbxPath.Text = fbd.SelectedPath;
+                    List<Tuple<string, DateTime>> listDates = new List<Tuple<string, DateTime>>();
+                    string[] dateDirectories = Directory.GetDirectories(fbd.SelectedPath);
 
-                    string[] files = Directory.GetFiles(fbd.SelectedPath, "*.dat", SearchOption.AllDirectories);
-
-                    // Figure out the total progress
-                    foreach (string file in files)
+                    // Only get the directories with dates
+                    foreach (string dateDirectory in dateDirectories)
                     {
-                        totalLinesForProgress = File.ReadAllLines(file).Length;
-                    } // for each file
+                        string dirName = dateDirectory.Substring(dateDirectory.LastIndexOf('\\') + 1);
+                        try
+                        {
+                            DateTime dt = DateTime.ParseExact(dirName, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            listDates.Add(new Tuple<string, DateTime>(dateDirectory, dt));
+                        }
+                        catch { }
+                    }
 
-                    // Actually parse the files
-                    foreach (string file in files)
+                    // Sort Directories by Date
+                    listDates.Sort(delegate (Tuple<string, DateTime> x, Tuple<string, DateTime> y)
                     {
-                        string type = file.Substring(file.LastIndexOf("\\") + 1);
-                        if (type.StartsWith("Stocks"))
+                        if (x.Item2 < y.Item2) 
                         {
-                            Thread th = new Thread(() => ParseStockFileThread(file));
-                            th.Start();
-                            this.listThreads.Add(th);
+                            return 1; 
                         }
-                        else if (type.StartsWith("Coin"))
+                        else
                         {
-                            Thread th = new Thread(() => ParseCoinFileThread(file));
-                            th.Start();
-                            this.listThreads.Add(th);
+                            return -1;
                         }
-                    } // for each file
+                    });
+
+                    this.lvDates.Items.Clear();
+                    foreach(Tuple<string, DateTime> tupDir in listDates)
+                    {
+                        ListViewItem item = new ListViewItem(tupDir.Item2.ToString("MM-dd-yyy"));
+                        item.Tag = tupDir.Item1;
+                        this.lvDates.Items.Add(item);
+                    }
                 } // ok
             } // using fbd
-        } // btnOpen_Click()
+        } // tsmiOpenDataDirectory_Click()
+
+        private void btnProcessDates_Click(object sender, EventArgs e)
+        {
+            // Reset all global attributes
+            this.ResetAll();
+
+            List<ListViewItem> listLvItemsReversed = new List<ListViewItem>();
+            foreach (ListViewItem item in this.lvDates.Items)
+            {
+                if (item.Checked)
+                {
+                    listLvItemsReversed.Add(item);
+                }
+            }
+            listLvItemsReversed.Reverse();
+
+            foreach(ListViewItem item in listLvItemsReversed)
+            { 
+                string directoryPath = (string)item.Tag;
+                string[] files = Directory.GetFiles(directoryPath, "*.dat", SearchOption.AllDirectories);
+
+                // Figure out the total progress
+                this.currentLinesForProgress = 0;
+                foreach (string file in files)
+                {
+                    this.totalLinesForProgress = File.ReadAllLines(file).Length;
+                } // for each file
+
+                this.lblProgress.Text = "Processing " + directoryPath.Substring(directoryPath.LastIndexOf('\\') + 1);
+
+                // Actually parse the files
+                foreach (string file in files)
+                {
+                    string type = file.Substring(file.LastIndexOf("\\") + 1);
+                    if (type.StartsWith("Stocks"))
+                    {
+                        this.ParseStockFileThread(file);
+                    }
+                    else if (type.StartsWith("Coin"))
+                    {
+                        this.ParseCoinFileThread(file);
+                    }
+                } // for each file
+            }
+
+            this.lblProgress.Text = "Displaying Data";
+
+            foreach(KeyValuePair<string, BaseInvestmentType> kvPair in dictInvestment2Data)
+            {
+                this.CreateInvestmentTab(kvPair.Value);
+            }
+        } // btnProcessDates_Click()
 
         private void IncrementProgress()
         {
@@ -84,11 +144,11 @@ namespace stockAnalyzer
             }
             else
             {
-                currentLinesForProgress++;
+                this.currentLinesForProgress++;
 
-                this.progressBar.Value = Math.Min(100, (int)((double)(currentLinesForProgress) / (double)(totalLinesForProgress) * 100.0));
+                this.progressBar.Value = Math.Min(100, (int)((double)(this.currentLinesForProgress) / (double)(this.totalLinesForProgress) * 100.0));
             }
-        }
+        } // IncrementProgress()
         #endregion UI_EVENTS
 
         //
@@ -100,16 +160,16 @@ namespace stockAnalyzer
             StockType stockData = new StockType();
             string stockName = file.Substring(file.LastIndexOf("\\") + 1).Replace("Stocks", "").Replace(".dat", "");
 
+
             using (StreamReader sr = new StreamReader(file))
             {
                 // skip the header
                 string line = sr.ReadLine();
-                IncrementProgress();
 
                 while (!sr.EndOfStream)
                 {
-                    line = sr.ReadLine();
                     IncrementProgress();
+                    line = sr.ReadLine();
 
                     string[] lineSplit = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
@@ -134,6 +194,7 @@ namespace stockAnalyzer
                             stockData.investmentType = InvestmentEnum.STOCKS;
                             dictInvestment2Data.Add(stockName, stockData);
                         }
+
                         stockData.listPriceData.Add(priceData);
                     }
                     else
@@ -142,8 +203,6 @@ namespace stockAnalyzer
                     }
                 }
             }
-
-            this.CreateInvestmentTab(stockData);
         } // ParseStockFileThread()
 
         private void ParseCoinFileThread(string file)
@@ -155,12 +214,11 @@ namespace stockAnalyzer
             {
                 // skip the header
                 string line = sr.ReadLine();
-                IncrementProgress();
 
                 while (!sr.EndOfStream)
                 {
-                    line = sr.ReadLine();
                     IncrementProgress();
+                    line = sr.ReadLine();
 
                     string[] lineSplit = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
@@ -185,6 +243,7 @@ namespace stockAnalyzer
                             coinData.investmentType = InvestmentEnum.COINS;
                             dictInvestment2Data.Add(coinName, coinData);
                         }
+
                         coinData.listPriceData.Add(priceData);
                     }
                     else
@@ -194,7 +253,7 @@ namespace stockAnalyzer
                 }
             }
 
-            this.CreateInvestmentTab(coinData);
+            //this.CreateInvestmentTab(coinData);
         } // ParseCoinFileThread()
 
         private void CreateInvestmentTab(BaseInvestmentType baseData)
@@ -228,10 +287,11 @@ namespace stockAnalyzer
         #region MISC_METHODS
         private void ResetAll()
         {
-            totalLinesForProgress = 0;
-            currentLinesForProgress = 0;
+            this.totalLinesForProgress = 0;
+            this.currentLinesForProgress = 0;
             dictInvestment2Data = new Dictionary<string, BaseInvestmentType>();
         } // ResetAll()
         #endregion MISC_METHODS
+
     }
 }

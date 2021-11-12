@@ -9,8 +9,8 @@ namespace stockAnalyzer
 
     internal class PriceCoinType : PriceBaseType
     {
-        public int marketCap;
-        public string circulatingSupply;
+        public int marketCap = 0;
+        public string circulatingSupply = String.Empty;
     }
 
     internal class CoinType : BaseInvestmentType
