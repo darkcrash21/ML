@@ -84,6 +84,14 @@ namespace stockAnalyzer
             } // using fbd
         } // tsmiOpenDataDirectory_Click()
 
+        private void cbxCheckAllData_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in this.lvDates.Items)
+            {
+                item.Checked = this.cbxCheckAllData.Checked;
+            }
+        } // cbxCheckAllData_CheckedChanged()
+
         private void btnProcessDates_Click(object sender, EventArgs e)
         {
             // Reset all global attributes
@@ -180,9 +188,9 @@ namespace stockAnalyzer
                         priceData.dateTime = DateTime.ParseExact(lineSplit[0], "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
 
                         double.TryParse(lineSplit[1], out priceData.price);
-                        double.TryParse(lineSplit[2], out priceData.priceHigh);
-                        double.TryParse(lineSplit[3], out priceData.priceLow);
-                        int.TryParse(lineSplit[4], out priceData.volume);
+                        double.TryParse(lineSplit[2], out priceData.dailyHigh);
+                        double.TryParse(lineSplit[3], out priceData.dailyLow);
+                        UInt64.TryParse(lineSplit[4], out priceData.volume);
 
                         if (dictInvestment2Data.ContainsKey(stockName))
                         {
@@ -229,9 +237,9 @@ namespace stockAnalyzer
                         priceData.dateTime = DateTime.ParseExact(lineSplit[0], "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
 
                         double.TryParse(lineSplit[1], out priceData.price);
-                        int.TryParse(lineSplit[2], out priceData.marketCap);
-                        int.TryParse(lineSplit[3], out priceData.volume);
-                        priceData.circulatingSupply = lineSplit[4];
+                        UInt64.TryParse(lineSplit[2], out priceData.marketCap);
+                        UInt64.TryParse(lineSplit[3], out priceData.volume);
+                        priceData.circulatingSupply = lineSplit[4].Substring(0, lineSplit[4].IndexOf(" "));
 
                         if (dictInvestment2Data.ContainsKey(coinName))
                         {
@@ -267,13 +275,19 @@ namespace stockAnalyzer
                 if (baseData.investmentType == InvestmentEnum.STOCKS)
                 {
                     StockType stockData = (StockType)baseData;
+                    StockSubView subView = new StockSubView(stockData);
+                    subView.Dock = DockStyle.Fill;
                     TabPage tabPage = new TabPage(stockData.name);
+                    tabPage.Controls.Add(subView);
                     this.tcStocks.TabPages.Add(tabPage);
                 }
                 else if (baseData.investmentType == InvestmentEnum.COINS)
                 {
                     CoinType coinData = (CoinType)baseData;
+                    CoinSubView subView = new CoinSubView(coinData);
+                    subView.Dock = DockStyle.Fill;
                     TabPage tabPage = new TabPage(coinData.name);
+                    tabPage.Controls.Add(subView);
                     this.tcCoins.TabPages.Add(tabPage);
                 }
             }

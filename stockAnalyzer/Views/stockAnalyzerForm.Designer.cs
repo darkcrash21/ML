@@ -44,6 +44,7 @@
             this.tlpDates = new System.Windows.Forms.TableLayoutPanel();
             this.btnProcessDates = new System.Windows.Forms.Button();
             this.lvDates = new System.Windows.Forms.ListView();
+            this.cbxCheckAllData = new System.Windows.Forms.CheckBox();
             this.tcStocksOrCoins.SuspendLayout();
             this.tpStocks.SuspendLayout();
             this.tpCoins.SuspendLayout();
@@ -60,7 +61,7 @@
             this.tcStocksOrCoins.Location = new System.Drawing.Point(123, 3);
             this.tcStocksOrCoins.Name = "tcStocksOrCoins";
             this.tcStocksOrCoins.SelectedIndex = 0;
-            this.tcStocksOrCoins.Size = new System.Drawing.Size(429, 370);
+            this.tcStocksOrCoins.Size = new System.Drawing.Size(776, 604);
             this.tcStocksOrCoins.TabIndex = 2;
             // 
             // tpStocks
@@ -69,7 +70,7 @@
             this.tpStocks.Location = new System.Drawing.Point(4, 24);
             this.tpStocks.Name = "tpStocks";
             this.tpStocks.Padding = new System.Windows.Forms.Padding(3);
-            this.tpStocks.Size = new System.Drawing.Size(421, 342);
+            this.tpStocks.Size = new System.Drawing.Size(768, 576);
             this.tpStocks.TabIndex = 0;
             this.tpStocks.Text = "Stocks";
             this.tpStocks.UseVisualStyleBackColor = true;
@@ -80,7 +81,7 @@
             this.tcStocks.Location = new System.Drawing.Point(3, 3);
             this.tcStocks.Name = "tcStocks";
             this.tcStocks.SelectedIndex = 0;
-            this.tcStocks.Size = new System.Drawing.Size(415, 336);
+            this.tcStocks.Size = new System.Drawing.Size(762, 570);
             this.tcStocks.TabIndex = 0;
             // 
             // tpCoins
@@ -89,7 +90,7 @@
             this.tpCoins.Location = new System.Drawing.Point(4, 24);
             this.tpCoins.Name = "tpCoins";
             this.tpCoins.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCoins.Size = new System.Drawing.Size(421, 342);
+            this.tpCoins.Size = new System.Drawing.Size(768, 576);
             this.tpCoins.TabIndex = 1;
             this.tpCoins.Text = "Coins";
             this.tpCoins.UseVisualStyleBackColor = true;
@@ -100,22 +101,22 @@
             this.tcCoins.Location = new System.Drawing.Point(3, 3);
             this.tcCoins.Name = "tcCoins";
             this.tcCoins.SelectedIndex = 0;
-            this.tcCoins.Size = new System.Drawing.Size(415, 336);
+            this.tcCoins.Size = new System.Drawing.Size(762, 570);
             this.tcCoins.TabIndex = 0;
             // 
             // progressBar
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(186, 409);
+            this.progressBar.Location = new System.Drawing.Point(186, 643);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(372, 23);
+            this.progressBar.Size = new System.Drawing.Size(719, 23);
             this.progressBar.TabIndex = 3;
             // 
             // lblProgress
             // 
             this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblProgress.Location = new System.Drawing.Point(3, 409);
+            this.lblProgress.Location = new System.Drawing.Point(3, 643);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(177, 23);
             this.lblProgress.TabIndex = 4;
@@ -126,7 +127,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(561, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(908, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -173,28 +174,30 @@
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 1;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Size = new System.Drawing.Size(555, 376);
+            this.tlpMain.Size = new System.Drawing.Size(902, 610);
             this.tlpMain.TabIndex = 6;
             // 
             // tlpDates
             // 
             this.tlpDates.ColumnCount = 1;
             this.tlpDates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDates.Controls.Add(this.btnProcessDates, 0, 1);
             this.tlpDates.Controls.Add(this.lvDates, 0, 0);
+            this.tlpDates.Controls.Add(this.btnProcessDates, 0, 2);
+            this.tlpDates.Controls.Add(this.cbxCheckAllData, 0, 1);
             this.tlpDates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpDates.Location = new System.Drawing.Point(3, 3);
             this.tlpDates.Name = "tlpDates";
-            this.tlpDates.RowCount = 2;
+            this.tlpDates.RowCount = 3;
             this.tlpDates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpDates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpDates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpDates.Size = new System.Drawing.Size(114, 370);
+            this.tlpDates.Size = new System.Drawing.Size(114, 604);
             this.tlpDates.TabIndex = 3;
             // 
             // btnProcessDates
             // 
             this.btnProcessDates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnProcessDates.Location = new System.Drawing.Point(3, 333);
+            this.btnProcessDates.Location = new System.Drawing.Point(3, 567);
             this.btnProcessDates.Name = "btnProcessDates";
             this.btnProcessDates.Size = new System.Drawing.Size(108, 34);
             this.btnProcessDates.TabIndex = 4;
@@ -208,21 +211,35 @@
             this.lvDates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDates.Location = new System.Drawing.Point(3, 3);
             this.lvDates.Name = "lvDates";
-            this.lvDates.Size = new System.Drawing.Size(108, 324);
+            this.lvDates.Size = new System.Drawing.Size(108, 528);
             this.lvDates.TabIndex = 5;
             this.lvDates.UseCompatibleStateImageBehavior = false;
             this.lvDates.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // cbxCheckAllData
+            // 
+            this.cbxCheckAllData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxCheckAllData.AutoSize = true;
+            this.cbxCheckAllData.Location = new System.Drawing.Point(3, 537);
+            this.cbxCheckAllData.Name = "cbxCheckAllData";
+            this.cbxCheckAllData.Size = new System.Drawing.Size(108, 24);
+            this.cbxCheckAllData.TabIndex = 6;
+            this.cbxCheckAllData.Text = "All Data";
+            this.cbxCheckAllData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbxCheckAllData.UseVisualStyleBackColor = true;
+            this.cbxCheckAllData.CheckedChanged += new System.EventHandler(this.cbxCheckAllData_CheckedChanged);
             // 
             // stockAnalyzerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 435);
+            this.ClientSize = new System.Drawing.Size(908, 669);
             this.Controls.Add(this.tlpMain);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "stockAnalyzerForm";
             this.Text = "stockAnalyzer";
@@ -233,6 +250,7 @@
             this.menuStrip1.PerformLayout();
             this.tlpMain.ResumeLayout(false);
             this.tlpDates.ResumeLayout(false);
+            this.tlpDates.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,5 +273,6 @@
         private TableLayoutPanel tlpDates;
         private Button btnProcessDates;
         private ListView lvDates;
+        private CheckBox cbxCheckAllData;
     }
 }

@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace stockAnalyzer
 {
-    internal enum InvestmentEnum
+    public enum InvestmentEnum
     {
         INVALID,
         STOCKS,
         COINS
     } // InvestmentEnum
 
-    internal class PriceBaseType
+    public class PriceBaseType
     {
         public DateTime dateTime;
         public double price;
-        public int volume;
+        public UInt64 volume;
     } // PriceBaseType
 
-    internal class BaseInvestmentType
+    public class BaseInvestmentType
     {
         public string name = String.Empty;
         public InvestmentEnum investmentType = InvestmentEnum.INVALID;

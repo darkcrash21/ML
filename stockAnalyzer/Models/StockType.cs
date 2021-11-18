@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace stockAnalyzer
 {
-    internal class PriceStockType : PriceBaseType
+    public class PriceStockType : PriceBaseType
     {
-        public double priceHigh;
-        public double priceLow;
+        public double dailyHigh;
+        public double dailyLow;
     }
 
-    internal class StockType : BaseInvestmentType
+    public class StockType : BaseInvestmentType
     {
         new List<PriceStockType> listPriceData = new List<PriceStockType>();
     }

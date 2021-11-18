@@ -5,6 +5,9 @@
     <Compile Update="Views\stockAnalyzerForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Views\SubViews\BaseSubView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\SubViews\CoinSubView.cs">
       <SubType>UserControl</SubType>
     </Compile>
