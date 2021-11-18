@@ -8,7 +8,7 @@ import sys
 configFile = "settings.csv"
 investmentListFile = "myList.csv"
 endProgram = False
-gitPushSleepTime_Sec = 120
+gitPushSleepTime_Sec = 60 * 60
 investments = []
 
 #
