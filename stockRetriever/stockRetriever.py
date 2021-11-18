@@ -77,7 +77,7 @@ def ReadInvestmentsList():
 #
 # CreateDailyInvestmentFile
 #
-def CreateDailyInvestmentFile(filename):
+def CreateDailyInvestmentFile(investment, filename):
     year = str(time.localtime().tm_year).zfill(4)
     month = str(time.localtime().tm_mon).zfill(2)
     day = str(time.localtime().tm_mday).zfill(2)
@@ -93,7 +93,6 @@ def CreateDailyInvestmentFile(filename):
         fs = open(filePath, "w", encoding="utf-8")
         # write out the header
         header = "Date-Time,"
-        investment = investment[filename]
         for marker in investment['markers']:
             header += marker['markerName'] + ","
         header = header[0:len(header) - 1]
@@ -121,7 +120,7 @@ def GetPriceThread(investment):
         
         outputLine = timestamp
         
-        filePath = CreateDailyInvestmentFile(investment['filename'])
+        filePath = CreateDailyInvestmentFile(investment, investment['filename'])
         try:
             fs = open(filePath, "a", encoding="utf-8")
             # Get the html data
