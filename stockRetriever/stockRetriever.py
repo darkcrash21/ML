@@ -109,19 +109,19 @@ def GetPriceThread(investment):
     print("GetPriceThread: " + investment['name'] + " Start\n")
 
     while endProgram != True:
-        # Get the current timestamp
-        year = str(time.localtime().tm_year).zfill(4)
-        month = str(time.localtime().tm_mon).zfill(2)
-        day = str(time.localtime().tm_mday).zfill(2)
-        hour = str(time.localtime().tm_hour).zfill(2)
-        minute = str(time.localtime().tm_min).zfill(2)
-        sec = str(time.localtime().tm_sec).zfill(2)
-        timestamp = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec + ","
-        
-        outputLine = timestamp
-        
-        filePath = CreateDailyInvestmentFile(investment, investment['filename'])
         try:
+            # Get the current timestamp
+            year = str(time.localtime().tm_year).zfill(4)
+            month = str(time.localtime().tm_mon).zfill(2)
+            day = str(time.localtime().tm_mday).zfill(2)
+            hour = str(time.localtime().tm_hour).zfill(2)
+            minute = str(time.localtime().tm_min).zfill(2)
+            sec = str(time.localtime().tm_sec).zfill(2)
+            timestamp = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec + ","
+        
+            outputLine = timestamp
+        
+            filePath = CreateDailyInvestmentFile(investment, investment['filename'])
             fs = open(filePath, "a", encoding="utf-8")
             # Get the html data
             webUrl = urllib.request.urlopen(investment['url'])
