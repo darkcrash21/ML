@@ -93,7 +93,8 @@ def CreateDailyInvestmentFile(filename):
         fs = open(filePath, "w", encoding="utf-8")
         # write out the header
         header = "Date-Time,"
-        for marker in investment[filename]:
+        investment = investment[filename]
+        for marker in investment['markers']:
             header += marker['markerName'] + ","
         header = header[0:len(header) - 1]
         fs.write(header + "\n")
