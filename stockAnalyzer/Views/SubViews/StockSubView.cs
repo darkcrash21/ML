@@ -15,13 +15,15 @@ namespace stockAnalyzer
     {
         private StockType stockData;
         
-        private Pen penPrice = new Pen(Color.Blue, 2);
-        private Pen penDailyHigh = new Pen(Color.Green, 2);
-        private Pen penDailyLow = new Pen(Color.Red, 2);
+        private Pen penPrice = new Pen(Color.Green, 2.5f);
+        private Pen penDailyHigh = new Pen(Color.FromArgb((int)(255 * .5), Color.Blue), 1.5f);
+        private Pen penDailyLow = new Pen(Color.FromArgb((int)(255 * .5), Color.Red), 1.5f);
+        private Pen penPriceBestFit = new Pen(Color.FromArgb((int)(255 * .75), Color.Green), 1.5f);
 
         private DashStyle dashStylePrice = DashStyle.Solid;
         private DashStyle dashStyleDailyHigh = DashStyle.Dash;
-        private DashStyle dashStyleDailyLow = DashStyle.DashDot; 
+        private DashStyle dashStyleDailyLow = DashStyle.Dash;
+        private DashStyle dashStylePriceBestFit = DashStyle.Dot;
 
         //
         // Constructor
@@ -35,6 +37,7 @@ namespace stockAnalyzer
             penPrice.DashStyle = this.dashStylePrice;
             penDailyHigh.DashStyle = this.dashStyleDailyHigh;
             penDailyLow.DashStyle = this.dashStyleDailyLow;
+            penPriceBestFit.DashStyle = this.dashStylePriceBestFit;
         } // Constructor
         #endregion CONSTRUCTOR_DESTRUCTOR
 
@@ -61,6 +64,7 @@ namespace stockAnalyzer
             GraphDataType priceGraphData = new GraphDataType("Price", this.penPrice);
             GraphDataType dailyHighGraphData = new GraphDataType("Daily High", this.penDailyHigh);
             GraphDataType dailyLowGraphData = new GraphDataType("Daily Low", this.penDailyLow);
+            GraphDataType priceBestFitGraphData = new GraphDataType("Price Best Fit", this.penPriceBestFit);
 
             // Add all the data to the list view and graph
             List<List<string>> listRows = new List<List<string>>();
@@ -68,6 +72,7 @@ namespace stockAnalyzer
             listGraphData.Add(priceGraphData);
             listGraphData.Add(dailyHighGraphData);
             listGraphData.Add(dailyLowGraphData);
+            listGraphData.Add(priceBestFitGraphData);
 
             foreach (PriceStockType priceData in this.stockData.listPriceData)
             {
@@ -95,9 +100,27 @@ namespace stockAnalyzer
             this.AddDataRows(listRows);
 
             // Scale the graph data
+            priceGraphData.SetMinMaxBuffers();
             priceGraphData.ScaleGraphPoints();
             dailyHighGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
             dailyLowGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
+
+            // Calculate Price's best fit line
+            List<PointF> listOrigPoints = new List<PointF>();
+            foreach (GraphDataPointType dataPoint in priceGraphData.GetPoints())
+            {
+                PointF point = new PointF(dataPoint.x, dataPoint.value);
+                listOrigPoints.Add(point);
+            }
+
+            double a, b;
+            List<PointF> bestFit = MathUtilities.GenerateLinearBestFit(listOrigPoints, out a, out b);
+            for (int i = 0; i < bestFit.Count; i++)
+            {
+                priceBestFitGraphData.AddValue(bestFit[i].Y);
+            }
+            priceBestFitGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
+
             this.AddGraphData(listGraphData);
         } // StockSubView_Load()
         #endregion UI_EVENTS

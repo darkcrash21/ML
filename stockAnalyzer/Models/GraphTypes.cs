@@ -78,12 +78,15 @@ namespace stockAnalyzer
             this.AddValue((float)value);
         } // AddValue()
 
-        public void ScaleGraphPoints()
+        public void SetMinMaxBuffers()
         {
             // Scale the min and max offsets to add buffer around the min/max
             this.minBuffer = this.min * (1 - bufferAmount);
             this.maxBuffer = this.max * (1 + bufferAmount);
+        } // SetMinMaxBuffers()
 
+        public void ScaleGraphPoints()
+        {
             foreach(GraphDataPointType point in this.listGraphPoints)
             {
                 point.x = (float)point.index / (float)this.listGraphPoints.Count; ;
