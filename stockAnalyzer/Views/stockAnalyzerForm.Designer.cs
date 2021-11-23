@@ -42,9 +42,10 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpDates = new System.Windows.Forms.TableLayoutPanel();
-            this.btnProcessDates = new System.Windows.Forms.Button();
             this.lvDates = new System.Windows.Forms.ListView();
+            this.btnProcessDates = new System.Windows.Forms.Button();
             this.cbxCheckAllData = new System.Windows.Forms.CheckBox();
+            this.tsmiOpenDefaultDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.tcStocksOrCoins.SuspendLayout();
             this.tpStocks.SuspendLayout();
             this.tpCoins.SuspendLayout();
@@ -135,6 +136,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOpenDataDirectory,
+            this.tsmiOpenDefaultDirectory,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -145,19 +147,19 @@
             // 
             this.tsmiOpenDataDirectory.Name = "tsmiOpenDataDirectory";
             this.tsmiOpenDataDirectory.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiOpenDataDirectory.Size = new System.Drawing.Size(224, 22);
+            this.tsmiOpenDataDirectory.Size = new System.Drawing.Size(270, 22);
             this.tsmiOpenDataDirectory.Text = "Open Data Directory";
             this.tsmiOpenDataDirectory.Click += new System.EventHandler(this.tsmiOpenDataDirectory_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // tlpMain
@@ -194,17 +196,6 @@
             this.tlpDates.Size = new System.Drawing.Size(114, 604);
             this.tlpDates.TabIndex = 3;
             // 
-            // btnProcessDates
-            // 
-            this.btnProcessDates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnProcessDates.Location = new System.Drawing.Point(3, 567);
-            this.btnProcessDates.Name = "btnProcessDates";
-            this.btnProcessDates.Size = new System.Drawing.Size(108, 34);
-            this.btnProcessDates.TabIndex = 4;
-            this.btnProcessDates.Text = "Process";
-            this.btnProcessDates.UseVisualStyleBackColor = true;
-            this.btnProcessDates.Click += new System.EventHandler(this.btnProcessDates_Click);
-            // 
             // lvDates
             // 
             this.lvDates.CheckBoxes = true;
@@ -215,6 +206,17 @@
             this.lvDates.TabIndex = 5;
             this.lvDates.UseCompatibleStateImageBehavior = false;
             this.lvDates.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // btnProcessDates
+            // 
+            this.btnProcessDates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProcessDates.Location = new System.Drawing.Point(3, 567);
+            this.btnProcessDates.Name = "btnProcessDates";
+            this.btnProcessDates.Size = new System.Drawing.Size(108, 34);
+            this.btnProcessDates.TabIndex = 4;
+            this.btnProcessDates.Text = "Process";
+            this.btnProcessDates.UseVisualStyleBackColor = true;
+            this.btnProcessDates.Click += new System.EventHandler(this.btnProcessDates_Click);
             // 
             // cbxCheckAllData
             // 
@@ -231,6 +233,15 @@
             this.cbxCheckAllData.UseVisualStyleBackColor = true;
             this.cbxCheckAllData.CheckedChanged += new System.EventHandler(this.cbxCheckAllData_CheckedChanged);
             // 
+            // openDefaultDirectoryToolStripMenuItem
+            // 
+            this.tsmiOpenDefaultDirectory.Name = "openDefaultDirectoryToolStripMenuItem";
+            this.tsmiOpenDefaultDirectory.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.tsmiOpenDefaultDirectory.Size = new System.Drawing.Size(270, 22);
+            this.tsmiOpenDefaultDirectory.Text = "Open Default Directory";
+            this.tsmiOpenDefaultDirectory.Click += new System.EventHandler(this.tsmiOpenDefaultDirectory_Click);
+            // 
             // stockAnalyzerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -240,6 +251,7 @@
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "stockAnalyzerForm";
             this.Text = "stockAnalyzer";
@@ -274,5 +286,6 @@
         private Button btnProcessDates;
         private ListView lvDates;
         private CheckBox cbxCheckAllData;
+        private ToolStripMenuItem tsmiOpenDefaultDirectory;
     }
 }

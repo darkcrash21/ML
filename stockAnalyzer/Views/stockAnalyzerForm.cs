@@ -45,44 +45,54 @@ namespace stockAnalyzer
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
-                    List<Tuple<string, DateTime>> listDates = new List<Tuple<string, DateTime>>();
-                    string[] dateDirectories = Directory.GetDirectories(fbd.SelectedPath);
-
-                    // Only get the directories with dates
-                    foreach (string dateDirectory in dateDirectories)
-                    {
-                        string dirName = dateDirectory.Substring(dateDirectory.LastIndexOf('\\') + 1);
-                        try
-                        {
-                            DateTime dt = DateTime.ParseExact(dirName, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                            listDates.Add(new Tuple<string, DateTime>(dateDirectory, dt));
-                        }
-                        catch { }
-                    }
-
-                    // Sort Directories by Date
-                    listDates.Sort(delegate (Tuple<string, DateTime> x, Tuple<string, DateTime> y)
-                    {
-                        if (x.Item2 < y.Item2) 
-                        {
-                            return 1; 
-                        }
-                        else
-                        {
-                            return -1;
-                        }
-                    });
-
-                    this.lvDates.Items.Clear();
-                    foreach(Tuple<string, DateTime> tupDir in listDates)
-                    {
-                        ListViewItem item = new ListViewItem(tupDir.Item2.ToString("MM-dd-yyy"));
-                        item.Tag = tupDir.Item1;
-                        this.lvDates.Items.Add(item);
-                    }
+                    this.OpenDirectory(fbd.SelectedPath);
                 } // ok
             } // using fbd
         } // tsmiOpenDataDirectory_Click()
+
+        private void tsmiOpenDefaultDirectory_Click(object sender, EventArgs e)
+        {
+            this.OpenDirectory("C:\\Users\\hanm\\OneDrive\\Programming\\ML\\stockRetriever");
+        } // tsmiOpenDefaultDirectory_Click()
+
+        private void OpenDirectory(string path)
+        {
+            List<Tuple<string, DateTime>> listDates = new List<Tuple<string, DateTime>>();
+            string[] dateDirectories = Directory.GetDirectories(path);
+
+            // Only get the directories with dates
+            foreach (string dateDirectory in dateDirectories)
+            {
+                string dirName = dateDirectory.Substring(dateDirectory.LastIndexOf('\\') + 1);
+                try
+                {
+                    DateTime dt = DateTime.ParseExact(dirName, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    listDates.Add(new Tuple<string, DateTime>(dateDirectory, dt));
+                }
+                catch { }
+            }
+
+            // Sort Directories by Date
+            listDates.Sort(delegate (Tuple<string, DateTime> x, Tuple<string, DateTime> y)
+            {
+                if (x.Item2 < y.Item2)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            });
+
+            this.lvDates.Items.Clear();
+            foreach (Tuple<string, DateTime> tupDir in listDates)
+            {
+                ListViewItem item = new ListViewItem(tupDir.Item2.ToString("MM-dd-yyy"));
+                item.Tag = tupDir.Item1;
+                this.lvDates.Items.Add(item);
+            }
+        } // OpenDirectory()
 
         private void cbxCheckAllData_CheckedChanged(object sender, EventArgs e)
         {
@@ -187,23 +197,35 @@ namespace stockAnalyzer
 
                         priceData.dateTime = DateTime.ParseExact(lineSplit[0], "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
 
-                        double.TryParse(lineSplit[1], out priceData.price);
-                        double.TryParse(lineSplit[2], out priceData.dailyHigh);
-                        double.TryParse(lineSplit[3], out priceData.dailyLow);
-                        UInt64.TryParse(lineSplit[4], out priceData.volume);
-
-                        if (dictInvestment2Data.ContainsKey(stockName))
+                        // Convert date time from Pacific to Eastern
+                        TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("US Eastern Standard Time");
+                        DateTime easternTime = TimeZoneInfo.ConvertTime(priceData.dateTime, TimeZoneInfo.Local, timeZoneInfo);
+                        
+                        // Only parse data from 9:30AM (Eastern) to 4:00PM (Eastern) and weekdays
+                        if (easternTime.TimeOfDay > new TimeSpan(9, 30, 0) &&
+                            easternTime.TimeOfDay < new TimeSpan(16, 0, 0) &&
+                            easternTime.DayOfWeek >= DayOfWeek.Monday &&
+                            easternTime.DayOfWeek <= DayOfWeek.Friday )
                         {
-                            stockData = (StockType)dictInvestment2Data[stockName];
-                        }
-                        else
-                        {
-                            stockData.name = stockName;
-                            stockData.investmentType = InvestmentEnum.STOCKS;
-                            dictInvestment2Data.Add(stockName, stockData);
+                            double.TryParse(lineSplit[1], out priceData.price);
+                            double.TryParse(lineSplit[2], out priceData.dailyHigh);
+                            double.TryParse(lineSplit[3], out priceData.dailyLow);
+                            UInt64.TryParse(lineSplit[4], out priceData.volume);
+
+                            if (dictInvestment2Data.ContainsKey(stockName))
+                            {
+                                stockData = (StockType)dictInvestment2Data[stockName];
+                            }
+                            else
+                            {
+                                stockData.name = stockName;
+                                stockData.investmentType = InvestmentEnum.STOCKS;
+                                dictInvestment2Data.Add(stockName, stockData);
+                            }
+
+                            stockData.listPriceData.Add(priceData);
                         }
 
-                        stockData.listPriceData.Add(priceData);
                     }
                     else
                     {
@@ -304,6 +326,8 @@ namespace stockAnalyzer
             this.totalLinesForProgress = 0;
             this.currentLinesForProgress = 0;
             dictInvestment2Data = new Dictionary<string, BaseInvestmentType>();
+            this.tcStocks.TabPages.Clear();
+            this.tcCoins.TabPages.Clear();
         } // ResetAll()
         #endregion MISC_METHODS
 

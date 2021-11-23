@@ -13,6 +13,7 @@ namespace stockAnalyzer
     public partial class BaseSubView : UserControl
     {
         private BaseInvestmentType baseData;
+        private GraphView graphView;
 
         //
         // Constructor
@@ -22,6 +23,7 @@ namespace stockAnalyzer
         {
             InitializeComponent();
             this.baseData = baseData;
+            this.graphView = new GraphView();
         } // Constructor
         #endregion CONSTRUCTOR_DESTRUCTOR
 
@@ -51,6 +53,9 @@ namespace stockAnalyzer
             chVolume.Name = "chVolume";
             chVolume.Width = 150;
             this.lvDetails.Columns.Add(chVolume);
+
+            this.graphView.Dock = DockStyle.Fill;
+            this.tpGraph.Controls.Add(this.graphView);
         } // BaseSubView_Load()
         #endregion UI_EVENTS
 
@@ -65,6 +70,8 @@ namespace stockAnalyzer
 
         protected void AddDataRows(List<List<string>> listRows)
         {
+            List<ListViewItem> listItems = new List<ListViewItem>();
+
             foreach(List<string> row in listRows)
             {
                 ListViewItem item = new ListViewItem();
@@ -79,9 +86,15 @@ namespace stockAnalyzer
                         item.SubItems.Add(row[i]);
                     }
                 }
-                this.lvDetails.Items.Add(item);
+                listItems.Add(item);
             }
+            this.lvDetails.Items.AddRange(listItems.ToArray());
         } // AddDataRows()
+
+        protected void AddGraphData(List<GraphDataType> listGraphData)
+        {
+            this.graphView.AddData(listGraphData);
+        } // AddGraphData()
 
         protected string GetNumDecimalPlaces(double value)
         {
@@ -96,6 +109,7 @@ namespace stockAnalyzer
 
             return strDecimalPlaces;
         } // GetNumDecimalPlaces()
+
         #endregion PROTECTED_METHODS
     }
 }

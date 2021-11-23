@@ -11,6 +11,9 @@
     <Compile Update="Views\SubViews\CoinSubView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\SubViews\GraphView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\SubViews\StockSubView.cs">
       <SubType>UserControl</SubType>
     </Compile>
