@@ -129,14 +129,17 @@ namespace stockAnalyzer
             if (info != string.Empty)
             {
                this.lblDataInfo.Text = info;
+               this.lblDataInfo.Invalidate();
             }
          }
          this.prevMousePos = e.Location;
+         this.Invalidate();
       } // GraphView_MouseMove()
 
       private void GraphView_MouseDoubleClick(object sender, MouseEventArgs e)
       {
          this.dMousePos = new Point();
+         this.Invalidate();
       } // GraphView_MouseDoubleClick()
 
       #endregion MOUSE_EVENTS
@@ -168,6 +171,7 @@ namespace stockAnalyzer
                this.listGdiData.Add(gdiData);
             }
          }
+         this.Invalidate();
       } // AddData()
       #endregion PUBLIC_METHODS
 

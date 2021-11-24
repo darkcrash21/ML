@@ -35,8 +35,7 @@
          // 
          // timer60Hz
          // 
-         this.timer60Hz.Enabled = true;
-         this.timer60Hz.Interval = 16;
+         this.timer60Hz.Interval = 5;
          this.timer60Hz.Tick += new System.EventHandler(this.timer60Hz_Tick);
          // 
          // lblDataInfo
