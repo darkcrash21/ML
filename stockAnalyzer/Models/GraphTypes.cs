@@ -9,21 +9,27 @@ namespace stockAnalyzer
    public class GraphDataPointType
    {
       public int index;
+      public bool isInterpolated;
+      public DateTime dateTime;
       public float value;
       public float x;         // Scaled 0.0 - 1.0
       public float y;         // Scaled 0.0 - 1.0
 
-      public GraphDataPointType(int index, float value, float x, float y)
+      public GraphDataPointType(int index, bool isInterpolated, DateTime time, float value, float x, float y)
       {
          this.index = index;
+         this.isInterpolated = isInterpolated;
+         this.dateTime = time;
          this.value = value;
          this.x = x;
          this.y = y;
       }
 
-      public GraphDataPointType(int index, float value)
+      public GraphDataPointType(int index, bool isInterpolated, DateTime time, float value)
       {
          this.index = index;
+         this.isInterpolated = isInterpolated;
+         this.dateTime = time;
          this.value = value;
          this.x = float.NaN;
          this.y = float.NaN;
@@ -53,7 +59,7 @@ namespace stockAnalyzer
       //
       // Public Setters
       //
-      public void AddValue(float value)
+      public void AddValue(bool isInterpolated, DateTime time, float value)
       {
          if (value < this.min)
          {
@@ -64,18 +70,18 @@ namespace stockAnalyzer
             this.max = value;
          }
 
-         GraphDataPointType point = new GraphDataPointType(this.listGraphPoints.Count, value);
+         GraphDataPointType point = new GraphDataPointType(this.listGraphPoints.Count, isInterpolated, time, value);
          this.listGraphPoints.Add(point);
       }
 
-      public void AddValue(double value)
+      public void AddValue(bool isInterpolated, DateTime time, double value)
       {
-         this.AddValue((float)value);
+         this.AddValue(isInterpolated, time, (float)value);
       } // AddValue()
 
-      public void AddValue(int value)
+      public void AddValue(bool isInterpolated, DateTime time, int value)
       {
-         this.AddValue((float)value);
+         this.AddValue(isInterpolated, time, (float)value);
       } // AddValue()
 
       public void SetMinMaxBuffers()
@@ -141,7 +147,8 @@ namespace stockAnalyzer
 
    public class GdiDataPointType
    {
-      public PointF point;
+      public PointF point;             // Scaled 0.0 - 1.0
+      public PointF forDisplay;
       public GraphDataPointType data;
    } // GdiDataPointType
 

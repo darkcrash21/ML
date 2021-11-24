@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>x64</PlatformTarget>
     <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
 
 </Project>

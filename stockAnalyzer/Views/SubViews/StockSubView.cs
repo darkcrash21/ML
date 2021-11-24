@@ -92,9 +92,9 @@ namespace stockAnalyzer
             listRows.Add(listRow);
 
             // Add to the graph
-            priceGraphData.AddValue(priceData.price);
-            dailyHighGraphData.AddValue(priceData.dailyHigh);
-            dailyLowGraphData.AddValue(priceData.dailyLow);
+            priceGraphData.AddValue(priceData.isInterpolated, priceData.dateTime, priceData.price);
+            dailyHighGraphData.AddValue(priceData.isInterpolated, priceData.dateTime, priceData.dailyHigh);
+            dailyLowGraphData.AddValue(priceData.isInterpolated, priceData.dateTime, priceData.dailyLow);
          }
 
          this.AddDataRows(listRows);
@@ -104,7 +104,8 @@ namespace stockAnalyzer
          priceGraphData.ScaleGraphPoints();
          dailyHighGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
          dailyLowGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
-
+         
+         /*
          // Calculate Price's best fit line
          List<PointF> listOrigPoints = new List<PointF>();
          foreach (GraphDataPointType dataPoint in priceGraphData.GetPoints())
@@ -117,10 +118,10 @@ namespace stockAnalyzer
          List<PointF> bestFit = MathUtilities.GenerateLinearBestFit(listOrigPoints, out a, out b);
          for (int i = 0; i < bestFit.Count; i++)
          {
-            priceBestFitGraphData.AddValue(bestFit[i].Y);
+            priceBestFitGraphData.AddValue(true, new DateTime(), bestFit[i].Y);
          }
          priceBestFitGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
-
+         */
          this.AddGraphData(listGraphData);
       } // StockSubView_Load()
       #endregion UI_EVENTS

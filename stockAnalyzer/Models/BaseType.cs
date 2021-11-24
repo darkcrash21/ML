@@ -15,6 +15,7 @@ namespace stockAnalyzer
 
    public class PriceBaseType
    {
+      public bool isInterpolated;
       public DateTime dateTime;
       public double price;
       public UInt64 volume;

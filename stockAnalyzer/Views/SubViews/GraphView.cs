@@ -24,6 +24,8 @@ namespace stockAnalyzer
       public GraphView()
       {
          InitializeComponent();
+
+         SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
       } // Constructor
       #endregion CONSTRUCTOR_DESTRUCTOR
 
@@ -42,25 +44,51 @@ namespace stockAnalyzer
          // Move the origin to the center vertically
          gfx.TranslateTransform(0 + this.dMousePos.X, this.Height + this.dMousePos.Y, MatrixOrder.Append);
 
+         // Draw the Crosshair
+         if (this.prevMousePos != new Point())
+         {
+            using (Pen pen = new Pen(Color.FromArgb((int)(255 * .25), Color.White)))
+            {
+               pen.DashStyle = DashStyle.Dash;
+
+               // Vertical line
+               gfx.DrawLine(pen, this.prevMousePos.X, 0, this.prevMousePos.X, this.Height);
+
+               // Horizontal line
+               //gfx.DrawLine(pen, 0, this.Height - this.prevMousePos.Y, this.Width, this.Height - this.prevMousePos.Y);
+            }
+         }
+
          // For all graph data types
          foreach (GdiDataType gdiData in this.listGdiData)
          {
             // Test
             //gfx.DrawEllipse(gdiData.pen, 0, 0, 20, 20);
 
-            // Rescale Y to pixels
+            // Draw all the graph points but rescale Y to pixels displayed
             if (gdiData.dataPoints != null)
             {
                List<PointF> listPoints = new List<PointF>();
                foreach (GdiDataPointType dataPoint in gdiData.dataPoints)
                {
-                  listPoints.Add(new PointF(dataPoint.point.X * this.Width, dataPoint.point.Y * this.Height));
+                  dataPoint.forDisplay = new PointF(dataPoint.point.X * this.Width, dataPoint.point.Y * this.Height);
+                  listPoints.Add(dataPoint.forDisplay);
                }
                gfx.DrawLines(gdiData.pen, listPoints.ToArray());
             }
          }
       } // Render()
 
+      private void timer60Hz_Tick(object sender, EventArgs e)
+      {
+         this.Invalidate();
+      } // timer60Hz_Tick()
+      #endregion UI_EVENTS
+
+      //
+      // Mouse Events
+      //
+      #region MOUSE_EVENTS
       private void GraphView_MouseMove(object sender, MouseEventArgs e)
       {
          if (e.Button == MouseButtons.Left)
@@ -71,6 +99,38 @@ namespace stockAnalyzer
          {
             this.dMousePos = new Point();
          }
+         else
+         {
+            // Display the Data Info where the mouse is located
+            string info = string.Empty;
+            bool timeAdded = false;
+
+            foreach(GdiDataType gdiData in this.listGdiData)
+            {
+               if (gdiData.dataPoints != null)
+               {
+                  foreach (GdiDataPointType dataPoint in gdiData.dataPoints)
+                  {
+                     if (e.Location.X == (int)dataPoint.forDisplay.X)
+                     {
+                        if (!timeAdded && dataPoint.data.dateTime != new DateTime())
+                        {
+                           info += dataPoint.data.dateTime.ToString() + "\n";
+                           timeAdded = true;
+                        }
+
+                        info += gdiData.name + ": " + dataPoint.data.value.ToString() + (dataPoint.data.isInterpolated ? "*" : "") + "\n";
+                        break;
+                     }
+                  }
+               }
+            }
+
+            if (info != string.Empty)
+            {
+               this.lblDataInfo.Text = info;
+            }
+         }
          this.prevMousePos = e.Location;
       } // GraphView_MouseMove()
 
@@ -79,11 +139,7 @@ namespace stockAnalyzer
          this.dMousePos = new Point();
       } // GraphView_MouseDoubleClick()
 
-      private void timer60Hz_Tick(object sender, EventArgs e)
-      {
-         this.Invalidate();
-      } // timer60Hz_Tick()
-      #endregion UI_EVENTS
+      #endregion MOUSE_EVENTS
 
       //
       // Public Methods
@@ -107,7 +163,10 @@ namespace stockAnalyzer
             }
 
             // Add to local copy of all data types for this graph
-            this.listGdiData.Add(gdiData);
+            if (gdiData.dataPoints.Count > 0)
+            {
+               this.listGdiData.Add(gdiData);
+            }
          }
       } // AddData()
       #endregion PUBLIC_METHODS

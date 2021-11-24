@@ -90,9 +90,9 @@ namespace stockAnalyzer
             listRows.Add(listRow);
 
             // Add to the graph
-            priceGraphData.AddValue(priceData.price);
+            priceGraphData.AddValue(priceData.isInterpolated, priceData.dateTime, priceData.price);
             //circulatingSupplyGraphData.AddValue(priceData.circulatingSupply);
-            marketCapGraphData.AddValue(priceData.marketCap);
+            marketCapGraphData.AddValue(priceData.isInterpolated, priceData.dateTime, priceData.marketCap);
          }
          this.AddDataRows(listRows);
 
@@ -103,6 +103,7 @@ namespace stockAnalyzer
          marketCapGraphData.SetMinMaxBuffers();
          marketCapGraphData.ScaleGraphPoints(marketCapGraphData.MinBuffer(), marketCapGraphData.MaxBuffer());
 
+         /*
          // Calculate Price's best fit line
          List<PointF> listOrigPoints = new List<PointF>();
          foreach (GraphDataPointType dataPoint in priceGraphData.GetPoints())
@@ -115,10 +116,10 @@ namespace stockAnalyzer
          List<PointF> bestFit = MathUtilities.GenerateLinearBestFit(listOrigPoints, out a, out b);
          for (int i = 0; i < bestFit.Count; i++)
          {
-            priceBestFitGraphData.AddValue(bestFit[i].Y);
+            priceBestFitGraphData.AddValue(true, new DateTime(), bestFit[i].Y);
          }
          priceBestFitGraphData.ScaleGraphPoints(priceGraphData.MinBuffer(), priceGraphData.MaxBuffer());
-
+         */
          this.AddGraphData(listGraphData);
 
       } // CoinSubView_Load()

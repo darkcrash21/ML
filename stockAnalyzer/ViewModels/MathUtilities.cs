@@ -57,6 +57,7 @@ namespace stockAnalyzer
             for(int i = 0; i < listInterpPrice.Count; i++)
             {
                PriceStockType interpPriceData = new PriceStockType();
+               interpPriceData.isInterpolated = true;
                interpPriceData.dateTime = new DateTime((long)listInterpTicks[i]);
                interpPriceData.price = listInterpPrice[i];
                interpPriceData.volume = prevStockData.volume; //listInterpVolume[i];
@@ -87,6 +88,7 @@ namespace stockAnalyzer
             for (int i = 0; i < listInterpPrice.Count; i++)
             {
                PriceCoinType interpPriceData = new PriceCoinType();
+               interpPriceData.isInterpolated = true;
                interpPriceData.dateTime = new DateTime((long)listInterpTicks[i]);
                interpPriceData.price = listInterpPrice[i];
                interpPriceData.volume = prevCoinData.volume; //listInterpVolume[i];
