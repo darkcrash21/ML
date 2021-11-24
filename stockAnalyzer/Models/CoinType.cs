@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace stockAnalyzer
 {
-    public class PriceCoinType : PriceBaseType
-    {
-        public UInt64 marketCap = 0;
-        public string circulatingSupply = String.Empty;
-    }
+   public class PriceCoinType : PriceBaseType
+   {
+      public UInt64 marketCap = 0;
+      public string circulatingSupply = String.Empty;
+   }
 
-    public class CoinType : BaseInvestmentType
-    {
-        new List<PriceCoinType> listPriceData = new List<PriceCoinType>();
-    }
+   public class CoinType : BaseInvestmentType
+   {
+      new List<PriceCoinType> listPriceData = new List<PriceCoinType>();
+   }
 }
