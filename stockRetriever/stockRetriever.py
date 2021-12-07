@@ -82,8 +82,18 @@ def CreateDailyInvestmentFile(investment, filename):
     month = str(time.localtime().tm_mon).zfill(2)
     day = str(time.localtime().tm_mday).zfill(2)
 
+    # Create the Year directory if it doesn't exist
+    dir = year
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+
+    # Create the Month directory if it doesn't exist
+    dir = year + "/" + month
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+
     # Create the day's directory if it doesn't exist
-    dir = year + "-" + month + "-" + day + "/"
+    dir = year + "/" + month + "/" + year + "-" + month + "-" + day + "/"
     if not os.path.exists(dir):
         os.mkdir(dir)
 
