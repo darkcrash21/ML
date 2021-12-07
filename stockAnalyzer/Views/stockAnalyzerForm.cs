@@ -58,7 +58,7 @@ namespace stockAnalyzer
       private void OpenDirectory(string path)
       {
          List<Tuple<string, DateTime>> listDates = new List<Tuple<string, DateTime>>();
-         string[] dateDirectories = Directory.GetDirectories(path);
+         string[] dateDirectories = Directory.GetDirectories(path, "****-**-**", SearchOption.AllDirectories);
 
          // Only get the directories with dates
          foreach (string dateDirectory in dateDirectories)
