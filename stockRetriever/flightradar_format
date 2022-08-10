@@ -1,0 +1,19 @@
+["0D0993", 33.6614, -118.437, 117, 12425, 343, "", "F-MMTJ1", "A320", "XA-VLN", 1660118237, "LAX", "BJX", "Y4899", 0, 2496, "VOI899", 0, "VOI"]
+0 ICAO 24-Bit: "0D0993"
+1 Latitude: 33.6614
+2 Longitude: -118.437
+3 Heading_deg: 117
+4 Altitude_ft: 12425
+5 Ground_Speed_kts: 343
+6 Unknown:
+7 Unknown:
+8 AircraftType: A320
+9 Registration: XA-VLN
+10 SerialNumber: 1660118237
+11 DepartureAirport: LAX
+12 ArrivalAirport: BJX
+13 FlightNumber: Y4899
+14 Unknown: 0
+15 Unknown: 2496
+16 FlightNumber2: VOI899
+17 Unknown: 0
