@@ -1,0 +1,4 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-11T07:13:06, A1A12E, 33.1262, -117.2922, 257, 525, 171, GALX, N204DD, CLD, SAN, , N204DD
+2022-08-11T07:13:08, A1A12E, 33.1262, -117.2922, 257, 525, 171, GALX, N204DD, CLD, SAN, , N204DD
+2022-08-11T07:13:10, A1A12E, 33.1257, -117.2952, 256, 675, 174, GALX, N204DD, CLD, SAN, , N204DD
