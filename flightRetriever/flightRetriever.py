@@ -11,7 +11,7 @@ from requests_html import HTMLSession
 from datetime import datetime, timedelta
 
 endProgram = False
-gitPushSleepTime_Sec = 60 * 60
+gitPushSleepTime_Sec = 10#60 * 60
 
 #
 # ParseStringToInt
