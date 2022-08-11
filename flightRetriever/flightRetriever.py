@@ -57,8 +57,6 @@ def CreateDailyFlightFile(filename):
 # CreateDailyFlightFile()
 
 def GetFlightData():
-    GitPush()
-    gitPushTime = datetime.now()
     print("GetFlightData: Start\n")
     s = HTMLSession()
 
@@ -148,35 +146,35 @@ def GetFlightData():
                 print("\n" + str(currentTime) + ": !! 10 minute timer hit, starting over!!\n")
                 contInnerLoop = False
                 break
-
-            if currentTime - gitPushTime > timedelta(minutes=1):
-                GitPush()
-                gitPushTime = datetime.now()
         # while !endProgram     ## If the session times out after ~15 and gets an error, break out
     # while !endProgram         ## Sets up the session
 # GetFlightData()
 
 #
-# Git Push
+# Git Push Thread
 #
-def GitPush():
-    print("Git: Pull")
-    os.system("git pull")
-    print("Git: Add")
-    os.system("git add .")
-    print("Git: Commit")
-    os.system("git commit -m \"(flightRetreiver) Auto update\"")
-    print("Git: Push")
-    os.system("git push")
-    print("*****")
+def GitPushThread():
+    while endProgram != True:
+        print("Git: Pull")
+        os.system("git pull")
+        print("Git: Add")
+        os.system("git add .")
+        print("Git: Commit")
+        os.system("git commit -m \"(flightRetreiver) Auto update\"")
+        print("Git: Push")
+        os.system("git push")
+
+        time.sleep(gitPushSleepTime_Sec)
+        print("*****")
+    # while !endProgram
 # GitPushThread
 
 #
 # Main
 #
 
-#thGitPush = threading.Thread(target=GitPushThread, args=())
-#thGitPush.start()
+thGitPush = threading.Thread(target=GitPushThread, args=())
+thGitPush.start()
 
 #thGetData = threading.Thread(target=GetFlightDataThread2, args=[])
 #thGetData.start()
