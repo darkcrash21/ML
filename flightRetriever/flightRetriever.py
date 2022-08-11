@@ -71,7 +71,7 @@ def GetFlightData():
         print(str(startTime) + ": Start new session ")
 
         response = s.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; CrOS armv7l 13597.84.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.98 Safari/537.36'})
-        response.html.render()
+        #response.html.render()
         contInnerLoop = True
 
         while contInnerLoop == True:
