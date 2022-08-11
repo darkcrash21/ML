@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A70523, 33.6795, -117.8665, 208, 0, 66, B737, N551WN, SNA, PHX, WN490, SWA490
 A70523, 33.5986, -117.9003, 187, 3100, 164, B737, N551WN, SNA, PHX, WN490, SWA490
+A70523, 33.5657, -117.8967, 162, 3975, 233, B737, N551WN, SNA, PHX, WN490, SWA490

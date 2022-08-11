@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A506D1, 33.6441, -117.9501, 90, 18350, 374, A21N, N423AN, LAX, FLL, AA2670, AAL2670
 A506D1, 33.6135, -117.6727, 106, 19950, 437, A21N, N423AN, LAX, FLL, AA2670, AAL2670
+A506D1, 33.5931, -117.5894, 106, 20275, 453, A21N, N423AN, LAX, FLL, AA2670, AAL2670

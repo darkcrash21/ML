@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A3C2A3, 33.7241, -117.9882, 137, 9550, 102, C172, N341SP, , , , N341SP
 A3C2A3, 33.6807, -117.9371, 126, 9500, 106, C172, N341SP, , , , N341SP
+A3C2A3, 33.6682, -117.9225, 128, 9500, 105, C172, N341SP, , , , N341SP

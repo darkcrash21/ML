@@ -13,7 +13,6 @@ from datetime import datetime, timedelta
 endProgram = False
 gitPushSleepTime_Sec = 60 * 60
 
-
 #
 # ParseStringToInt
 #
@@ -59,6 +58,7 @@ def CreateDailyFlightFile(filename):
 
 def GetFlightData():
     GitPush()
+    gitPushTime = datetime.now()
     print("GetFlightData: Start\n")
     s = HTMLSession()
 
@@ -151,6 +151,7 @@ def GetFlightData():
 
             if currentTime - gitPushTime > timedelta(minutes=1):
                 GitPush()
+                gitPushTime = datetime.now()
         # while !endProgram     ## If the session times out after ~15 and gets an error, break out
     # while !endProgram         ## Sets up the session
 # GetFlightData()
@@ -167,7 +168,6 @@ def GitPush():
     os.system("git commit -m \"(flightRetreiver) Auto update\"")
     print("Git: Push")
     os.system("git push")
-    gitPushTime = datetime.now()
     print("*****")
 # GitPushThread
 

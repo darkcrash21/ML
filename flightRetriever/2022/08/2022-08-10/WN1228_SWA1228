@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 AC0F4D, 33.6971, -118.1251, 132, 31700, 419, B38M, N8762Q, OAK, SAN, WN1228, SWA1228
 AC0F4D, 33.5259, -117.9047, 135, 25200, 405, B38M, N8762Q, OAK, SAN, WN1228, SWA1228
+AC0F4D, 33.4801, -117.8515, 135, 23725, 395, B38M, N8762Q, OAK, SAN, WN1228, SWA1228

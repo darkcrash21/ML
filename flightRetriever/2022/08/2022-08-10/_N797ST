@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 AAD3A8, 33.6755, -117.9549, 69, 1975, 71, EV97, N797ST, LGB, , , N797ST
 AAD3A8, 33.683, -117.8826, 81, 1125, 89, EV97, N797ST, LGB, , , N797ST
+AAD3A8, 33.6869, -117.8675, 111, 675, 89, EV97, N797ST, LGB, , , N797ST

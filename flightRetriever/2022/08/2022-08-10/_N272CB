@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A2AE1E, 33.1286, -117.2731, 87, 0, 5, P28A, N272CB, CLD, , , N272CB
 A2AE1E, 33.1262, -117.292, 262, 700, 77, P28A, N272CB, CLD, , , N272CB
+A2AE1E, 33.1322, -117.3021, 350, 1250, 71, P28A, N272CB, CLD, , , N272CB
