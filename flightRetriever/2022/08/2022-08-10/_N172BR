@@ -1,0 +1,4 @@
+//ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+A120C4, 33.6333, -117.75, 240, 2600, 88, C172, N172BR, SNA, , , N172BR
+A120C4, 33.6333, -117.75, 240, 2600, 88, C172, N172BR, SNA, , , N172BR
+A120C4, 33.6269, -117.7633, 240, 2600, 88, C172, N172BR, SNA, , , N172BR
