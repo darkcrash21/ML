@@ -1,0 +1,3 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-10T23:39:01, A86D2B, 33.7471, -118.535, 168, 11575, 294, MD11, N642FE, LAX, IND, FX2650, FDX2650
+2022-08-10T23:39:03, A86D2B, 33.7471, -118.535, 168, 11575, 294, MD11, N642FE, LAX, IND, FX2650, FDX2650
