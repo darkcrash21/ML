@@ -1,0 +1,3 @@
+[Desktop Entry]
+Exec=lxterminal -e "cd ~/Desktop/ML/stockRetriever && python3 stockRetriever.py"
+Type=Application
