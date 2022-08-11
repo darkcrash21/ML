@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 
 endProgram = False
 gitPushSleepTime_Sec = 60 * 60
+gitPushTime = 0
 
 #
 # ParseStringToInt
@@ -57,6 +58,7 @@ def CreateDailyFlightFile(filename):
 # CreateDailyFlightFile()
 
 def GetFlightData():
+    GitPush()
     print("GetFlightData: Start\n")
     s = HTMLSession()
 
@@ -65,6 +67,7 @@ def GetFlightData():
         
     while endProgram != True:
         startTime = datetime.now()
+
         print(str(startTime) + ": Start new session ")
 
         response = s.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; CrOS armv7l 13597.84.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.98 Safari/537.36'})
@@ -146,35 +149,34 @@ def GetFlightData():
                 contInnerLoop = False
                 break
 
+            if gitPushTime + timedelta(minutes=1) < datetime.now():
+                GitPush()
         # while !endProgram     ## If the session times out after ~15 and gets an error, break out
     # while !endProgram         ## Sets up the session
 # GetFlightData()
 
 #
-# Git Push Thread
+# Git Push
 #
-def GitPushThread():
-    while endProgram != True:
-        print("Git: Pull")
-        os.system("git pull")
-        print("Git: Add")
-        os.system("git add .")
-        print("Git: Commit")
-        os.system("git commit -m \"(flightRetreiver) Auto update\"")
-        print("Git: Push")
-        os.system("git push")
-
-        time.sleep(gitPushSleepTime_Sec)
-        print("*****")
-    # while !endProgram
+def GitPush():
+    print("Git: Pull")
+    os.system("git pull")
+    print("Git: Add")
+    os.system("git add .")
+    print("Git: Commit")
+    os.system("git commit -m \"(flightRetreiver) Auto update\"")
+    print("Git: Push")
+    os.system("git push")
+    gitPushTime = datetime.now()
+    print("*****")
 # GitPushThread
 
 #
 # Main
 #
 
-thGitPush = threading.Thread(target=GitPushThread, args=())
-thGitPush.start()
+#thGitPush = threading.Thread(target=GitPushThread, args=())
+#thGitPush.start()
 
 #thGetData = threading.Thread(target=GetFlightDataThread2, args=[])
 #thGetData.start()
