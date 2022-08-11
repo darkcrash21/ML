@@ -50,7 +50,7 @@ def CreateDailyFlightFile(filename):
     filePath = dir + filename
     if not os.path.exists(filePath):
         fs = open(filePath, "w", encoding="utf-8")
-        fs.write("//ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2\n")
+        fs.write("//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2\n")
         fs.close()
     
     return filePath
@@ -111,7 +111,8 @@ def GetFlightData():
                             flightNumber1 = v[13]
                             flightNumber2 = v[16]
 
-                            output = str(icao) + ", "
+                            output = timestamp + ", "
+                            output += str(icao) + ", "
                             output += str(lat) + ", "
                             output += str(long) + ", "
                             output += str(heading_deg) + ", "

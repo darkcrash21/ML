@@ -1,3 +1,2 @@
-//ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
-A18109, 33.7532, -118.2889, 180, 3475, 102, C172, N19610, TOA, , , N19610
-A18109, 33.7446, -118.2891, 180, 3450, 104, C172, N19610, TOA, , , N19610
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-10T21:37:37,, A18109, 33.7169, -118.323, 284, 4400, 77, C172, N19610, TOA, , , N19610
