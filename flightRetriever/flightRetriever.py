@@ -149,7 +149,7 @@ def GetFlightData():
                 contInnerLoop = False
                 break
 
-            if gitPushTime + timedelta(minutes=1) < datetime.now():
+            if currentTime - gitPushTime > timedelta(minutes=1):
                 GitPush()
         # while !endProgram     ## If the session times out after ~15 and gets an error, break out
     # while !endProgram         ## Sets up the session

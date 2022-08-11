@@ -1,3 +1,4 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A5DF05, 33.7533, -118.0177, 135, 9425, 108, C172, N478CA, OXR, , , N478CA
 A5DF05, 33.7533, -118.0177, 135, 9425, 108, C172, N478CA, OXR, , , N478CA
+A5DF05, 33.3938, -117.6566, 145, 7400, 112, C172, N478CA, OXR, , , N478CA
