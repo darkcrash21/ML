@@ -74,7 +74,7 @@ def GetFlightData():
 
         while contInnerLoop == True:
             currentTime = datetime.now()
-            if currentTime - startTime < timedelta(minutes=1):
+            if currentTime - startTime < timedelta(minutes=10):
                 year = str(time.localtime().tm_year).zfill(4)
                 month = str(time.localtime().tm_mon).zfill(2)
                 day = str(time.localtime().tm_mday).zfill(2)
