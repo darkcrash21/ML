@@ -1,0 +1,4 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-11T12:09:21, AB9B89, 33.1256, -117.2924, 252, 550, 108, C240, N847TF, CLD, VNY, , N847TF
+2022-08-11T12:09:24, AB9B89, 33.1251, -117.2945, 254, 550, 111, C240, N847TF, CLD, VNY, , N847TF
+2022-08-11T12:09:27, AB9B89, 33.1251, -117.2945, 254, 550, 111, C240, N847TF, CLD, VNY, , N847TF

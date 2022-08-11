@@ -1,0 +1,3 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-11T12:09:54, C02DCF, 33.1326, -117.7987, 319, 17425, 364, CRJ9, C-FRJA, SAN, YVR, AC8763, JZA763
+2022-08-11T12:09:57, C02DCF, 33.1365, -117.8027, 319, 17550, 363, CRJ9, C-FRJA, SAN, YVR, AC8763, JZA763
