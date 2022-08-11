@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 
 endProgram = False
 gitPushSleepTime_Sec = 60 * 60
-gitPushTime = 0
+
 
 #
 # ParseStringToInt

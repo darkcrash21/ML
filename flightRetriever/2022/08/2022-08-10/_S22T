@@ -1,2 +1,3 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 , 33.7114, -117.8554, 105, 700, 99, S22T, , , , , S22T
+, 33.6863, -117.8621, 208, 100, 78, S22T, , , , , S22T

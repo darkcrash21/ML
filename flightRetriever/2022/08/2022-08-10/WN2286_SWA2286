@@ -1,2 +1,3 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A53F20, 33.6333, -118.8984, 120, 15750, 365, B737, N437WN, OAK, LGB, WN2286, SWA2286
+A53F20, 33.5569, -118.6841, 101, 11675, 346, B737, N437WN, OAK, LGB, WN2286, SWA2286

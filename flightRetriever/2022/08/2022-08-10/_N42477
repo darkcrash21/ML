@@ -1,2 +1,3 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A50DE8, 33.3546, -117.6325, 320, 6400, 108, P28A, N42477, CLD, , , N42477
+A50DE8, 33.4204, -117.6714, 289, 6400, 115, P28A, N42477, CLD, , , N42477

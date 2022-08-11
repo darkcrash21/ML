@@ -1,3 +1,5 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 , 33.702, -118.0877, 104, 3450, 90, , , , , , BLOCKED
 , 33.3708, -117.6111, 326, 2150, 122, , , , , , BLOCKED
+, 33.6706, -118.0855, 271, 3450, 86, , , , , , BLOCKED
+, 33.4302, -117.658, 326, 2150, 123, , , , , , BLOCKED

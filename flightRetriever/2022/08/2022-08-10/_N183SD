@@ -1,2 +1,3 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 A14D65, 33.5631, -117.7308, 142, 1475, 120, AS50, N183SD, SNA, , , N183SD
+A14D65, 33.5073, -117.6839, 148, 1275, 122, AS50, N183SD, SNA, , , N183SD

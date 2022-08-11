@@ -1,2 +1,3 @@
 //ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
 0D0932, 33.3872, -117.7642, 302, 10150, 309, A320, XA-VLL, MLM, LAX, Y4920, VOI920
+0D0932, 33.4828, -117.9326, 323, 8575, 292, A320, XA-VLL, MLM, LAX, Y4920, VOI920
