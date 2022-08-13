@@ -50,7 +50,7 @@ def CreateDailyFlightFile(filename):
     filePath = dir + filename
     if not os.path.exists(filePath):
         fs = open(filePath, "w", encoding="utf-8")
-        fs.write("//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2\n")
+        fs.write("//Timestamp, ICAO, Latitude_deg, Longitude_deg, Altitude_ft, Heading_deg, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2\n")
         fs.close()
     
     return filePath
@@ -101,8 +101,8 @@ def GetFlightData():
                             icao = v[0]
                             lat = v[1]
                             long = v[2]
-                            heading_deg = v[3]
                             alt_ft = v[4]
+                            heading_deg = v[3]
                             groundSpeed_kts = v[5]
                             aircraftType = v[8]
                             registrationNum = v[9]
@@ -116,8 +116,8 @@ def GetFlightData():
                             output += str(icao) + ", "
                             output += str(lat) + ", "
                             output += str(long) + ", "
-                            output += str(heading_deg) + ", "
                             output += str(alt_ft) + ", "
+                            output += str(heading_deg) + ", "
                             output += str(groundSpeed_kts) + ", "
                             output += str(aircraftType) + ", "
                             output += str(registrationNum) + ", "
@@ -128,7 +128,6 @@ def GetFlightData():
 
                             filePath = CreateDailyFlightFile(str(flightNumber1) + "_" + str(flightNumber2))
                             fs = open(filePath, "a", encoding="utf-8")
-                            #fs.write("//ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2")
                             fs.write(output)
                             fs.close()
                         else:
