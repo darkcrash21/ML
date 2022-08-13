@@ -1,0 +1,2 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Altitude_ft, Heading_deg, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+1660394982, A7DEBF, 33.6482, -118.4069, 10750, 117, 326, A320, N606NK, LAX, IAH, NK326, NKS326
