@@ -1,0 +1,4 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Heading_deg, Altitude_ft, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+2022-08-11T12:54:17, A0A8DA, 33.7497, -117.7974, 232, 36000, 443, B752, N14102, DEN, LIH, UA2307, UAL2307
+2022-08-11T12:54:20, A0A8DA, 33.7497, -117.7974, 232, 36000, 443, B752, N14102, DEN, LIH, UA2307, UAL2307
+2022-08-11T12:54:22, A0A8DA, 33.7482, -117.7997, 232, 36000, 443, B752, N14102, DEN, LIH, UA2307, UAL2307

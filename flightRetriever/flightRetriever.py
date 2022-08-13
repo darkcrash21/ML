@@ -81,7 +81,7 @@ def GetFlightData():
                 hour = str(time.localtime().tm_hour).zfill(2)
                 minute = str(time.localtime().tm_min).zfill(2)
                 sec = str(time.localtime().tm_sec).zfill(2)
-                timestamp = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec
+                #timestamp = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + sec
 
                 response = s.get(dataUrl, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'})
 
@@ -106,6 +106,7 @@ def GetFlightData():
                             groundSpeed_kts = v[5]
                             aircraftType = v[8]
                             registrationNum = v[9]
+                            timestamp = v[10]
                             departure = v[11]
                             arrival = v[12]
                             flightNumber1 = v[13]
