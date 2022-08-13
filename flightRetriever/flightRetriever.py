@@ -112,7 +112,7 @@ def GetFlightData():
                             flightNumber1 = v[13]
                             flightNumber2 = v[16]
 
-                            output = timestamp + ", "
+                            output = str(timestamp) + ", "
                             output += str(icao) + ", "
                             output += str(lat) + ", "
                             output += str(long) + ", "
