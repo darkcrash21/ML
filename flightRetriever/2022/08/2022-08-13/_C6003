@@ -1,0 +1,4 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Altitude_ft, Heading_deg, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+1660409394, AE27F4, 33.1251, -117.3729, 5725, 341, 117, H60, 6003, SAN, , , C6003
+1660409397, AE27F4, 33.1267, -117.3736, 5750, 341, 117, H60, 6003, SAN, , , C6003
+1660409397, AE27F4, 33.1267, -117.3736, 5750, 341, 117, H60, 6003, SAN, , , C6003
