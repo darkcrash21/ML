@@ -1,0 +1,4 @@
+//Timestamp, ICAO, Latitude_deg, Longitude_deg, Altitude_ft, Heading_deg, GroundSpeed_kts, AircraftType, RegistrationNum, Departure, Arrival, FlightNumber1, FlightNumber2
+1660402184, AD137B, 33.754, -117.8347, 5500, 106, 97, C152, N94118, LGB, , , N94118
+1660402184, AD137B, 33.754, -117.8347, 5500, 106, 97, C152, N94118, LGB, , , N94118
+1660402190, AD137B, 33.7532, -117.8315, 5500, 105, 98, C152, N94118, LGB, , , N94118
